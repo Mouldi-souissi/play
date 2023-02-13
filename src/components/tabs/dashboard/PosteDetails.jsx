@@ -9,16 +9,21 @@ import {
   ModalCloseButton,
   Button,
 } from "@chakra-ui/react";
+import console from "../../../assets/console.png";
 
-const PosteDetails = ({ onClose, isOpen, onOpen }) => {
+const PosteDetails = ({ onClose, isOpen, poste }) => {
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} size="full" isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>
+            <h2>{poste.name}</h2>
+          </ModalHeader>
           <ModalCloseButton />
-          <ModalBody></ModalBody>
+          <ModalBody>
+            <img src={console} alt="consoleImg" className="consoleImg" />
+          </ModalBody>
 
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
