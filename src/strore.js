@@ -1,18 +1,28 @@
 import { create } from "zustand";
 import users from "./db/users.json";
+import consoles from "./db/consoles.json";
+import games from "./db/games.json";
+import axios from "axios";
+import decode from "jwt-decode";
+
+const API_URL = "http://localhost:5000/api";
 
 const useGlobalStore = create((set) => ({
   isSidebarHidden: false,
   activeTab: "dashboard",
   loggedUser: "",
-  username: "User",
+  username: "",
   userType: "",
+  consoles: consoles,
+  games: games,
+  isLoading: false,
+  users: [],
 
   adminRoutes: [
     { link: "dashboard", icon: "fa fa-desktop", text: "Tableau de bord" },
     { link: "users", icon: "fa fa-user-o", text: "Utilisateurs" },
     {
-      link: "deposit",
+      link: "checkout",
       icon: "fa fa-money",
       text: "Caisse",
     },
@@ -31,7 +41,7 @@ const useGlobalStore = create((set) => ({
     { link: "dashboard", icon: "fa fa-desktop", text: "Tableau de bord" },
     { link: "users", icon: "fa fa-user-o", text: "Utilisateurs" },
     {
-      link: "deposit",
+      link: "checkout",
       icon: "fa fa-money",
       text: "Caisse",
     },
@@ -49,17 +59,36 @@ const useGlobalStore = create((set) => ({
     set({ activeTab: tab });
   },
 
-  login: (email, password) => {
-    console.log("users", users);
-    const match = users.find(
-      (user) => user.email === email && user.password === password
-    );
+  //*********  user
+  getUsers: () => {
+    set({ isLoading: true });
+    axios
+      .get(`${API_URL}/user`, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set({ users: res.data });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
 
-    if (match) {
-      localStorage.setItem("token", email);
-      set({ username: "admin", userType: "admin", activeTab: "dashboard" });
-      window.location.replace("/");
-    }
+  login: (email, password) => {
+    axios
+      .post(`${API_URL}/user/login`, { email, password })
+      .then((res) => {
+        localStorage.setItem("token", res.data);
+        const decodedToken = decode(res.data);
+        set({
+          username: decodedToken.name,
+          userType: decodedToken.type,
+          activeTab: "dashboard",
+        });
+        window.location.replace("/");
+      })
+      .catch((err) => console.log(err));
   },
   logout: () => {
     window.localStorage.removeItem("token");
@@ -75,6 +104,59 @@ const useGlobalStore = create((set) => ({
         activeTab: "dashboard",
       });
     }
+  },
+  addUser: (userData) => {
+    set({ isLoading: true });
+    axios
+      .post(`${API_URL}/user/register`, userData, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set((state) => ({ users: [...state.users, res.data] }));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+  editUser: (user) => {
+    set({ isLoading: true });
+    axios
+      .put(
+        `${API_URL}/user/${user._id}`,
+        { name: user.name, type: user.type },
+        {
+          headers: { token: localStorage.getItem("token") },
+        }
+      )
+      .then((res) => {
+        set((state) => ({
+          users: [
+            ...state.users.filter((user) => user._id !== res.data._id),
+            res.data,
+          ],
+        }));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+  deleteUser: (id) => {
+    set({ isLoading: true });
+    axios
+      .delete(`${API_URL}/user/${id}`, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set((state) => ({
+          users: state.users.filter((user) => user._id !== res.data._id),
+        }));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
   },
 }));
 

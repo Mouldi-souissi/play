@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
+import Checkout from "../components/tabs/checkout/Checkout";
 import Dashboard from "../components/tabs/dashboard/Dashboard";
+import Users from "../components/tabs/users/Users";
 import useGlobalStore from "../strore";
 
 const MainPage = () => {
@@ -13,6 +15,12 @@ const MainPage = () => {
   const handleTabs = () => {
     if (activeTab === "dashboard") {
       return <Dashboard />;
+    }
+    if (activeTab === "checkout") {
+      return <Checkout />;
+    }
+    if (activeTab === "users") {
+      return <Users />;
     }
   };
   const handleLogout = () => {
@@ -27,15 +35,13 @@ const MainPage = () => {
       <Sidebar />
       <div className={`content ${isSidebarHidden ? "full" : ""}`}>
         <div className="topBar">
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center justify-content-between">
             <button className="btn btn-transparent" onClick={toggleSideBar}>
               <i className="fa fa-bars"></i>
             </button>
-
-            <i
-              className="fa-solid fa-arrow-right-from-bracket btn"
-              onClick={handleLogout}
-            ></i>
+            <button className="btn btn-transparent" onClick={handleLogout}>
+              <i className="fa fa-sign-out" />
+            </button>
           </div>
         </div>
         <div className="container">{handleTabs()}</div>

@@ -1,0 +1,8 @@
+[
+  { "name": "P1", "isActive": false },
+  { "name": "P2", "isActive": true },
+  { "name": "P3", "isActive": false },
+  { "name": "P4", "isActive": false },
+  { "name": "P5", "isActive": false },
+  { "name": "P6", "isActive": false }
+]

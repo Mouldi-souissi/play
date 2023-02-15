@@ -223,3 +223,38 @@ i {
 .poste.poste_active {
   border: 10px solid orange !important;
 }
+
+.modal-footer {
+  border-color: transparent !important;
+}
+
+.table {
+  border-collapse: separate;
+  border-spacing: 0 0.2em;
+  min-width: 500px;
+}
+
+.table thead {
+  background: orange !important;
+  /* filter: drop-shadow(2px 1px 2px grey); */
+}
+
+.table i {
+  padding: 0;
+  margin-right: 10px;
+}
+
+tbody tr {
+  background: white;
+  vertical-align: middle;
+  filter: drop-shadow(1px 1px 1px rgba(128, 128, 128, 0.795));
+}
+
+td {
+  padding: 0 20px;
+}
+
+thead {
+  background: linear-gradient(var(--blueDark), var(--blueDark));
+  color: white;
+}
