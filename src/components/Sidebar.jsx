@@ -27,9 +27,8 @@ const Sidebar = () => {
                 }`}
                 onClick={() => switchTab(route.link)}
               >
-                <span className="icon">
-                  <i className={route.icon}></i>
-                </span>
+                <i className={route.icon}></i>
+
                 <span className="item">{route.text}</span>
               </div>
             </li>
@@ -50,28 +49,6 @@ const Sidebar = () => {
               </div>
             </li>
           ))}
-
-        {/* <li>
-          <div
-            className={`navlink ${activeTab === "reports" ? "active" : ""}`}
-            onClick={() => switchTab("calculator")}
-          >
-            <span className="icon">
-              <i className="fas fa-chart-line"></i>
-            </span>
-            <span className="item">Reports</span>
-          </div>
-        </li> */}
-        {/* <li>
-          <div
-            className={`navlink ${activeTab === "settings" ? "active" : ""}`}
-          >
-            <span className="icon">
-              <i className="fas fa-cog"></i>
-            </span>
-            <span className="item">Settings</span>
-          </div>
-        </li> */}
       </ul>
     </div>
   );

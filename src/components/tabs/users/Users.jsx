@@ -18,11 +18,11 @@ const Users = () => {
       <div className="d-flex align-items-center mb-5">
         <h3 className="m-0 me-3">Utilisateurs</h3>
         <button
-          className="btn btn-outline-primary p-2"
+          className="btn btn-outline-primary"
           data-bs-toggle="modal"
           data-bs-target="#addUser"
         >
-          <i className="fa fa-plus"></i>
+          <i class="bi bi-plus h3"></i>
         </button>
       </div>
       <div className="loader_wrapper">

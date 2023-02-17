@@ -36,21 +36,25 @@ const useGlobalStore = create((set) => ({
   },
 
   adminRoutes: [
-    { link: "dashboard", icon: "fa fa-desktop", text: "Tableau de bord" },
-    { link: "users", icon: "fa fa-user-o", text: "Utilisateurs" },
+    {
+      link: "dashboard",
+      icon: "bi bi-controller",
+      text: "Consoles",
+    },
+    { link: "users", icon: "bi bi-people-fill", text: "Utilisateurs" },
     {
       link: "checkout",
-      icon: "fa fa-money",
+      icon: "bi bi-coin",
       text: "Caisse",
     },
     {
       link: "history",
-      icon: "fa fa-clock-o",
+      icon: "bi bi-clock-history",
       text: "historique",
     },
     {
       link: "parametres",
-      icon: "fa fa-cog",
+      icon: "bi bi-gear",
       text: "Parametres",
     },
   ],

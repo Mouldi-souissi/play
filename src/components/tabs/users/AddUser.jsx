@@ -84,13 +84,13 @@ const AddUser = () => {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-secondary"
                 data-bs-dismiss="modal"
                 ref={refClose}
               >
                 Fermer
               </button>
-              <button type="submit" className="btn btn-secondary">
+              <button type="submit" className="btn btn-primary">
                 Ajouter
               </button>
             </div>

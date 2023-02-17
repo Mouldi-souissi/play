@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import console from "../../../assets/console.png";
+import React, { useEffect, useRef, useState } from "react";
+import consoleLogo from "../../../assets/console.png";
 import useGlobalStore from "../../../strore";
 import { generateUUID } from "../../../functions/generateUUID";
 import { formatCurrency } from "../../../functions/formatCurrency";
@@ -10,6 +10,12 @@ const Console = ({ poste }) => {
   const toggleConsoleActivity = useGlobalStore(
     (state) => state.toggleConsoleActivity
   );
+  const [isActive, setActivity] = useState(false);
+  const refClose = useRef();
+
+  useEffect(() => {
+    setActivity(poste.isActive);
+  }, [poste]);
 
   const [data, setData] = useState({ game: "FIFA", duration: "10" });
   const [rows, setRows] = useState([]);
@@ -50,6 +56,16 @@ const Console = ({ poste }) => {
     addSession(session);
   };
 
+  const activateSession = (id) => {
+    toggleConsoleActivity(id);
+    setActivity(!isActive);
+  };
+
+  const handleClose = () => {
+    setRows([]);
+    setTotal(0);
+  };
+
   return (
     <div
       className="modal fade"
@@ -61,7 +77,7 @@ const Console = ({ poste }) => {
       <div className="modal-dialog modal-fullscreen">
         <div className="modal-content">
           <div className="modal-header shadow-sm">
-            <img src={console} width="50px" />
+            <img src={consoleLogo} width="50px" />
             <h1 className="modal-title fs-5">{poste.name}</h1>
             <button
               type="button"
@@ -72,18 +88,18 @@ const Console = ({ poste }) => {
             ></button>
           </div>
           <div className="modal-body">
-            {!poste.isActive && (
+            {!isActive && (
               <button
                 className="btn btn-primary mb-3"
-                onClick={() => toggleConsoleActivity(poste.id)}
+                onClick={() => activateSession(poste.id)}
               >
                 Activer la session
               </button>
             )}
-            {poste.isActive && (
+            {isActive && (
               <button
-                className="btn btn-danger mb-3"
-                onClick={() => toggleConsoleActivity(poste.id)}
+                className="btn btn-secondary mb-3"
+                onClick={() => activateSession(poste.id)}
               >
                 Désactiver la session
               </button>
@@ -183,11 +199,14 @@ const Console = ({ poste }) => {
               type="button"
               className="btn btn-secondary"
               data-bs-dismiss="modal"
+              ref={refClose}
+              onClick={handleClose}
             >
               Fermer
             </button>
             <button type="button" className="btn btn-primary">
-              Terminer la session
+              Encaisser
+              <i className="fa fa-credit-card-alt ms-2" />
             </button>
           </div>
         </div>
