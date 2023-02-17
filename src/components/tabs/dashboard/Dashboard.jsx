@@ -25,7 +25,7 @@ const Dashboard = () => {
               data-bs-target="#console"
             >
               <img src={console} alt="consoleImg" className="consoleImg" />
-              <div>{poste.name}</div>
+              <div className="consoleText">{poste.name}</div>
             </div>
           ))}
       </div>
