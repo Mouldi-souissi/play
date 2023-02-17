@@ -14,18 +14,20 @@ const Dashboard = () => {
     <div className="dashboard">
       <h3 className="mb-5 text-center">Postes</h3>
       <div className="postes">
-        {consoles.map((poste) => (
-          <div
-            key={poste.name}
-            className={`poste ${poste.isActive && "poste_active"}`}
-            onClick={() => handlePosteClick(poste)}
-            data-bs-toggle="modal"
-            data-bs-target="#console"
-          >
-            <img src={console} alt="consoleImg" className="consoleImg" />
-            <div>{poste.name}</div>
-          </div>
-        ))}
+        {consoles
+          .sort((a, b) => a.id - b.id)
+          .map((poste) => (
+            <div
+              key={poste.name}
+              className={`poste ${poste.isActive && "poste_active"}`}
+              onClick={() => handlePosteClick(poste)}
+              data-bs-toggle="modal"
+              data-bs-target="#console"
+            >
+              <img src={console} alt="consoleImg" className="consoleImg" />
+              <div>{poste.name}</div>
+            </div>
+          ))}
       </div>
       <Console poste={poste} />
     </div>

@@ -1,8 +1,8 @@
 [
-  { "name": "P1", "isActive": false },
-  { "name": "P2", "isActive": true },
-  { "name": "P3", "isActive": false },
-  { "name": "P4", "isActive": false },
-  { "name": "P5", "isActive": false },
-  { "name": "P6", "isActive": false }
+  { "name": "P1", "isActive": false, "id": 1 },
+  { "name": "P2", "isActive": true, "id": 2 },
+  { "name": "P3", "isActive": false, "id": 3 },
+  { "name": "P4", "isActive": false, "id": 4 },
+  { "name": "P5", "isActive": false, "id": 5 },
+  { "name": "P6", "isActive": false, "id": 6 }
 ]

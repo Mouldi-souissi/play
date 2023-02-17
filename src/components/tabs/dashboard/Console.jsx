@@ -1,18 +1,53 @@
-import React, { useState, useId } from "react";
+import React, { useEffect, useState } from "react";
 import console from "../../../assets/console.png";
 import useGlobalStore from "../../../strore";
+import { generateUUID } from "../../../functions/generateUUID";
+import { formatCurrency } from "../../../functions/formatCurrency";
 
 const Console = ({ poste }) => {
   const games = useGlobalStore((state) => state.games);
+  const addSession = useGlobalStore((state) => state.addSession);
+  const toggleConsoleActivity = useGlobalStore(
+    (state) => state.toggleConsoleActivity
+  );
+
   const [data, setData] = useState({ game: "FIFA", duration: "10" });
   const [rows, setRows] = useState([]);
+  const [total, setTotal] = useState(0);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const addRow = () => {
-    setRows([...rows, { ...data, id: useId() }]);
+    const totalRow = calculateTotalRow(data);
+    setRows([...rows, { ...data, id: generateUUID(), total: totalRow }]);
+
+    setTotal(total + totalRow);
+  };
+
+  const deleteRow = (id) => {
+    setRows(rows.filter((row) => row.id !== id));
+    setTotal(total - rows.find((row) => row.id === id).total);
+  };
+
+  const calculateTotalRow = (row) => {
+    const match = games.find((game) => game.name === row.game);
+    const cost = match["cost"].find((c) => c.duration === Number(row.duration));
+
+    return cost["cost"] * Number(row.totalGames);
+  };
+
+  const startSession = () => {
+    const session = {
+      id: generateUUID(),
+      start: new Date(),
+      end: "",
+      total: 0,
+      console: poste.name,
+      isActive: true,
+    };
+    addSession(session);
   };
 
   return (
@@ -27,9 +62,7 @@ const Console = ({ poste }) => {
         <div className="modal-content">
           <div className="modal-header shadow-sm">
             <img src={console} width="50px" />
-            <h1 className="modal-title fs-5" id="exampleModalLabel">
-              {poste.name}
-            </h1>
+            <h1 className="modal-title fs-5">{poste.name}</h1>
             <button
               type="button"
               className="btn-close"
@@ -39,7 +72,23 @@ const Console = ({ poste }) => {
             ></button>
           </div>
           <div className="modal-body">
-            <button className="btn btn-primary mb-3">Activer la session</button>
+            {!poste.isActive && (
+              <button
+                className="btn btn-primary mb-3"
+                onClick={() => toggleConsoleActivity(poste.id)}
+              >
+                Activer la session
+              </button>
+            )}
+            {poste.isActive && (
+              <button
+                className="btn btn-danger mb-3"
+                onClick={() => toggleConsoleActivity(poste.id)}
+              >
+                Désactiver la session
+              </button>
+            )}
+
             <div className="lead my-3 text-center">
               Ajouter les matchs joués
             </div>
@@ -95,6 +144,7 @@ const Console = ({ poste }) => {
                   <th scope="col">Durée</th>
                   <th scope="col">Matches</th>
                   <th scope="col">Action</th>
+                  <th scope="col">Total</th>
                 </tr>
               </thead>
               <tbody>
@@ -104,13 +154,28 @@ const Console = ({ poste }) => {
                     <td>{row.duration}</td>
                     <td>{row.totalGames}</td>
                     <td>
-                      <button className="btn btn-transparent m-0">
-                        <i className="fa fa-trash-o text-danger " />
+                      <button
+                        className="btn btn-transparent m-0"
+                        onClick={() => deleteRow(row.id)}
+                      >
+                        <i className="fa fa-trash-o text-danger" />
                       </button>
                     </td>
+                    <td>{formatCurrency(row.total)}</td>
                   </tr>
                 ))}
               </tbody>
+              <tfoot className="table-dark">
+                <tr>
+                  <th scope="row">Total</th>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div className="lead fw-bold">{formatCurrency(total)}</div>
+                  </td>
+                </tr>
+              </tfoot>
             </table>
           </div>
           <div className="modal-footer">
@@ -122,7 +187,7 @@ const Console = ({ poste }) => {
               Fermer
             </button>
             <button type="button" className="btn btn-primary">
-              Sauvegarder
+              Terminer la session
             </button>
           </div>
         </div>

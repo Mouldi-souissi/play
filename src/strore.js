@@ -17,6 +17,23 @@ const useGlobalStore = create((set) => ({
   games: games,
   isLoading: false,
   users: [],
+  sessions: [],
+
+  addSession: (session) => {
+    set((state) => ({ sessions: [...state.sessions, session] }));
+  },
+
+  toggleConsoleActivity: (id) => {
+    set((state) => ({
+      consoles: [
+        ...state.consoles.filter((c) => c.id !== id),
+        {
+          ...state.consoles.find((c) => c.id === id),
+          isActive: !state.consoles.find((c) => c.id === id).isActive,
+        },
+      ],
+    }));
+  },
 
   adminRoutes: [
     { link: "dashboard", icon: "fa fa-desktop", text: "Tableau de bord" },
