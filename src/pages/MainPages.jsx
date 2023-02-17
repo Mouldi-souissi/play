@@ -37,14 +37,14 @@ const MainPage = () => {
         <div className="topBar">
           <div className="d-flex align-items-center justify-content-between">
             <button className="btn btn-transparent" onClick={toggleSideBar}>
-              <i className="fa fa-bars"></i>
+              <i className="bi bi-list"></i>
             </button>
             <button className="btn btn-transparent" onClick={handleLogout}>
-              <i className="fa fa-sign-out" />
+              <i className="bi bi-door-open" />
             </button>
           </div>
         </div>
-        <div className="container">{handleTabs()}</div>
+        {handleTabs()}
       </div>
     </div>
   );

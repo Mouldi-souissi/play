@@ -90,28 +90,28 @@ const Console = ({ poste }) => {
           <div className="modal-body">
             {!isActive && (
               <button
-                className="btn btn-primary mb-3"
+                className="btn btn-primary "
                 onClick={() => activateSession(poste.id)}
               >
                 Activer la session
+                <i className="bi bi-play-fill ms-2"></i>
               </button>
             )}
             {isActive && (
               <button
-                className="btn btn-secondary mb-3"
+                className="btn btn-secondary "
                 onClick={() => activateSession(poste.id)}
               >
                 Désactiver la session
+                <i className="bi bi-stop-fill ms-2"></i>
               </button>
             )}
 
-            <div className="lead my-3 text-center">
-              Ajouter les matchs joués
-            </div>
-            <div className="card p-4 shadow mb-4">
-              <div className="d-flex flex-wrap">
+            <div className="h6 my-3 text-center">Ajouter les matchs joués</div>
+            <div className="card p-4 shadow-sm mb-4">
+              <div className="d-flex flex-wrap align-items-end">
                 <div className="form-group me-4">
-                  <label>Veuillez choisir un jeux</label>
+                  <label className="my-2">Veuillez choisir un jeux</label>
                   <select
                     className="form-select"
                     onChange={handleChange}
@@ -125,7 +125,7 @@ const Console = ({ poste }) => {
                   </select>
                 </div>
                 <div className="form-group me-4">
-                  <label>Veuillez choisir la durée</label>
+                  <label className="my-2">Veuillez choisir la durée</label>
                   <select
                     className="form-select"
                     onChange={handleChange}
@@ -136,7 +136,7 @@ const Console = ({ poste }) => {
                   </select>
                 </div>
                 <div className="form-group">
-                  <label>Total des matchs</label>
+                  <label className="my-2">Total des matchs</label>
                   <input
                     type="text"
                     className="form-control"
@@ -174,7 +174,7 @@ const Console = ({ poste }) => {
                         className="btn btn-transparent m-0"
                         onClick={() => deleteRow(row.id)}
                       >
-                        <i className="fa fa-trash-o text-danger" />
+                        <i className="bi-trash3 red" />
                       </button>
                     </td>
                     <td>{formatCurrency(row.total)}</td>
@@ -183,12 +183,12 @@ const Console = ({ poste }) => {
               </tbody>
               <tfoot className="table-dark">
                 <tr>
-                  <th scope="row">Total</th>
+                  <td>Total</td>
                   <td></td>
                   <td></td>
                   <td></td>
                   <td>
-                    <div className="lead fw-bold">{formatCurrency(total)}</div>
+                    <div className="fw-bold">{formatCurrency(total)}</div>
                   </td>
                 </tr>
               </tfoot>

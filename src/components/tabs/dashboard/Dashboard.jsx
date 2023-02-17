@@ -12,7 +12,7 @@ const Dashboard = () => {
   };
   return (
     <div className="dashboard">
-      <h3 className="mb-5 text-center">Postes</h3>
+      <h4 className="mb-5 text-center sectionTitle">Postes</h4>
       <div className="postes">
         {consoles
           .sort((a, b) => a.id - b.id)

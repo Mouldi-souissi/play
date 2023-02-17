@@ -39,7 +39,7 @@ const useGlobalStore = create((set) => ({
     {
       link: "dashboard",
       icon: "bi bi-controller",
-      text: "Consoles",
+      text: "Postes",
     },
     { link: "users", icon: "bi bi-people-fill", text: "Utilisateurs" },
     {
@@ -118,10 +118,11 @@ const useGlobalStore = create((set) => ({
   checkAuth: () => {
     const token =
       localStorage.getItem("token") && localStorage.getItem("token");
+    const decodedToken = decode(token);
     if (token) {
       set({
-        username: "admin",
-        userType: "admin",
+        username: decodedToken.name,
+        userType: decodedToken.type,
         activeTab: "dashboard",
       });
     }

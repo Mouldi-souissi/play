@@ -50,7 +50,7 @@ const Login = () => {
           </div>
 
           <div className="d-flex justify-content-end">
-            <button type="submit" className="btn btn-secondary">
+            <button type="submit" className="btn btn-primary">
               Connecter
             </button>
           </div>

@@ -15,14 +15,14 @@ const Users = () => {
   }, []);
   return (
     <div className="container">
-      <div className="d-flex align-items-center mb-5">
-        <h3 className="m-0 me-3">Utilisateurs</h3>
+      <div className="d-flex align-items-baseline justify-content-center mb-5">
+        <h4 className="me-3  sectionTitle">Utilisateurs</h4>
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-outline-primary py-0 px-1"
           data-bs-toggle="modal"
           data-bs-target="#addUser"
         >
-          <i class="bi bi-plus h3"></i>
+          <i className="bi bi-plus h3"></i>
         </button>
       </div>
       <div className="loader_wrapper">
@@ -57,7 +57,7 @@ const Users = () => {
                   <td>
                     <button className="btn btn-transparent p-0">
                       <i
-                        className="fa fa-cog"
+                        className="bi bi-gear "
                         data-bs-toggle="modal"
                         data-bs-target="#editUser"
                         onClick={() => setUser(user)}
@@ -65,7 +65,7 @@ const Users = () => {
                     </button>
                     <button className="btn btn-transparent p-0">
                       <i
-                        className="fa fa-trash-o text-danger"
+                        className="bi bi-trash3 red"
                         data-bs-toggle="modal"
                         data-bs-target="#deleteUser"
                         onClick={() => setDeleteData(user)}
