@@ -1,8 +1,0 @@
-[
-  { "name": "P1", "isActive": false, "id": 1, "cart": [] },
-  { "name": "P2", "isActive": false, "id": 2, "cart": [] },
-  { "name": "P3", "isActive": false, "id": 3, "cart": [] },
-  { "name": "P4", "isActive": false, "id": 4, "cart": [] },
-  { "name": "P5", "isActive": false, "id": 5, "cart": [] },
-  { "name": "P6", "isActive": false, "id": 6, "cart": [] }
-]

@@ -1,6 +1,5 @@
 import { create } from "zustand";
-import users from "./db/users.json";
-import consoles from "./db/consoles.json";
+import { consoles } from "./db/consoles";
 import games from "./db/games.json";
 import axios from "axios";
 import decode from "jwt-decode";
@@ -30,6 +29,12 @@ const useGlobalStore = create((set) => ({
         {
           ...state.consoles.find((c) => c.id === id),
           isActive: !state.consoles.find((c) => c.id === id).isActive,
+          session: {
+            start: state.consoles.find((c) => c.id === id).isActive
+              ? ""
+              : new Date(),
+            end: "",
+          },
         },
       ],
     }));
@@ -59,17 +64,26 @@ const useGlobalStore = create((set) => ({
     },
   ],
   userRoutes: [
-    { link: "dashboard", icon: "fa fa-desktop", text: "Tableau de bord" },
-    { link: "users", icon: "fa fa-user-o", text: "Utilisateurs" },
+    {
+      link: "dashboard",
+      icon: "bi bi-controller",
+      text: "Postes",
+    },
+    { link: "users", icon: "bi bi-people-fill", text: "Utilisateurs" },
     {
       link: "checkout",
-      icon: "fa fa-money",
+      icon: "bi bi-coin",
       text: "Caisse",
     },
     {
       link: "history",
-      icon: "fa fa-clock-o",
+      icon: "bi bi-clock-history",
       text: "historique",
+    },
+    {
+      link: "parametres",
+      icon: "bi bi-gear",
+      text: "Parametres",
     },
   ],
 

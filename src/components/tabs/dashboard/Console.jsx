@@ -10,12 +10,7 @@ const Console = ({ poste }) => {
   const toggleConsoleActivity = useGlobalStore(
     (state) => state.toggleConsoleActivity
   );
-  const [isActive, setActivity] = useState(false);
   const refClose = useRef();
-
-  useEffect(() => {
-    setActivity(poste.isActive);
-  }, [poste]);
 
   const [data, setData] = useState({ game: "FIFA", duration: "10" });
   const [rows, setRows] = useState([]);
@@ -58,7 +53,6 @@ const Console = ({ poste }) => {
 
   const activateSession = (id) => {
     toggleConsoleActivity(id);
-    setActivity(!isActive);
   };
 
   const handleClose = () => {
@@ -79,6 +73,7 @@ const Console = ({ poste }) => {
           <div className="modal-header shadow-sm">
             <img src={consoleLogo} width="50px" />
             <h1 className="modal-title fs-5">{poste.name}</h1>
+
             <button
               type="button"
               className="btn-close"
@@ -88,22 +83,34 @@ const Console = ({ poste }) => {
             ></button>
           </div>
           <div className="modal-body">
-            {!isActive && (
+            {poste.isActive && (
+              <div className="d-flex justify-content-between">
+                <button
+                  className="btn btn-secondary "
+                  onClick={() => activateSession(poste.id)}
+                >
+                  Désactiver la session
+                  <i className="bi bi-stop-fill ms-2"></i>
+                </button>
+                <div>
+                  <div className="fs-5">
+                    <span>Début : </span>
+                    <span className="green">
+                      {new Date(poste.session.start).toLocaleTimeString("fr", {
+                        timeStyle: "short",
+                      })}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+            {!poste.isActive && (
               <button
                 className="btn btn-primary "
                 onClick={() => activateSession(poste.id)}
               >
                 Activer la session
                 <i className="bi bi-play-fill ms-2"></i>
-              </button>
-            )}
-            {isActive && (
-              <button
-                className="btn btn-secondary "
-                onClick={() => activateSession(poste.id)}
-              >
-                Désactiver la session
-                <i className="bi bi-stop-fill ms-2"></i>
               </button>
             )}
 

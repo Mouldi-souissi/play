@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import console from "../../../assets/console.png";
+import React, { useEffect, useState } from "react";
+import consoleLogo from "../../../assets/console.png";
 import useGlobalStore from "../../../strore";
 import Console from "./Console";
 
@@ -10,6 +10,14 @@ const Dashboard = () => {
   const handlePosteClick = (poste) => {
     setPost(poste);
   };
+
+  useEffect(() => {
+    if (poste) {
+      const match = consoles.find((c) => c.id === poste.id);
+      setPost(match);
+    }
+  }, [consoles]);
+
   return (
     <div className="dashboard">
       <h4 className="mb-5 text-center sectionTitle">Postes</h4>
@@ -24,7 +32,7 @@ const Dashboard = () => {
               data-bs-toggle="modal"
               data-bs-target="#console"
             >
-              <img src={console} alt="consoleImg" className="consoleImg" />
+              <img src={consoleLogo} alt="consoleImg" className="consoleImg" />
               <div className="consoleText">{poste.name}</div>
             </div>
           ))}
