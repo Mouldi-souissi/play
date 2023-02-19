@@ -12,32 +12,88 @@ const useGlobalStore = create((set) => ({
   loggedUser: "",
   username: "",
   userType: "",
-  consoles: consoles,
+  consoles: [],
   games: games,
   isLoading: false,
   users: [],
-  sessions: [],
 
-  addSession: (session) => {
-    set((state) => ({ sessions: [...state.sessions, session] }));
+  getStations: () => {
+    set({ isLoading: true });
+    axios
+      .get(`${API_URL}/station`, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set({ consoles: res.data });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
   },
 
-  toggleConsoleActivity: (id) => {
-    set((state) => ({
-      consoles: [
-        ...state.consoles.filter((c) => c.id !== id),
+  toggleConsoleActivity: (id, isActive) => {
+    set({ isLoading: true });
+    axios
+      .put(
+        `${API_URL}/station/${id}`,
+        { isActive: !isActive },
         {
-          ...state.consoles.find((c) => c.id === id),
-          isActive: !state.consoles.find((c) => c.id === id).isActive,
-          session: {
-            start: state.consoles.find((c) => c.id === id).isActive
-              ? ""
-              : new Date(),
-            end: "",
-          },
-        },
-      ],
-    }));
+          headers: { token: localStorage.getItem("token") },
+        }
+      )
+      .then((res) => {
+        set((state) => ({
+          consoles: [...state.consoles.filter((c) => c._id !== id), res.data],
+        }));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  addGameToSession: (station, game) => {
+    const { _id, games } = station;
+    set({ isLoading: true });
+    axios
+      .put(
+        `${API_URL}/station/${_id}`,
+        { games: [...games, game] },
+        {
+          headers: { token: localStorage.getItem("token") },
+        }
+      )
+      .then((res) => {
+        set((state) => ({
+          consoles: [...state.consoles.filter((c) => c._id !== _id), res.data],
+        }));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+  deleteGameFromSession: (station, gameId) => {
+    const { _id, games } = station;
+    set({ isLoading: true });
+    axios
+      .put(
+        `${API_URL}/station/${_id}`,
+        { games: games.filter((game) => game.id !== gameId) },
+        {
+          headers: { token: localStorage.getItem("token") },
+        }
+      )
+      .then((res) => {
+        set((state) => ({
+          consoles: [...state.consoles.filter((c) => c._id !== _id), res.data],
+        }));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
   },
 
   adminRoutes: [

@@ -6,30 +6,34 @@ import { formatCurrency } from "../../../functions/formatCurrency";
 
 const Console = ({ poste }) => {
   const games = useGlobalStore((state) => state.games);
-  const addSession = useGlobalStore((state) => state.addSession);
+  const addGameToSession = useGlobalStore((state) => state.addGameToSession);
+  const deleteGameFromSession = useGlobalStore(
+    (state) => state.deleteGameFromSession
+  );
   const toggleConsoleActivity = useGlobalStore(
     (state) => state.toggleConsoleActivity
   );
   const refClose = useRef();
 
   const [data, setData] = useState({ game: "FIFA", duration: "10" });
-  const [rows, setRows] = useState([]);
-  const [total, setTotal] = useState(0);
+
+  const total = poste.games.reduce((acc, cur) => (acc += cur.total), 0);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const addRow = () => {
-    const totalRow = calculateTotalRow(data);
-    setRows([...rows, { ...data, id: generateUUID(), total: totalRow }]);
-
-    setTotal(total + totalRow);
+  const addRow = (e) => {
+    e.preventDefault();
+    addGameToSession(poste, {
+      ...data,
+      id: generateUUID(),
+      total: calculateTotalRow(data),
+    });
   };
 
   const deleteRow = (id) => {
-    setRows(rows.filter((row) => row.id !== id));
-    setTotal(total - rows.find((row) => row.id === id).total);
+    deleteGameFromSession(poste, id);
   };
 
   const calculateTotalRow = (row) => {
@@ -39,25 +43,12 @@ const Console = ({ poste }) => {
     return cost["cost"] * Number(row.totalGames);
   };
 
-  const startSession = () => {
-    const session = {
-      id: generateUUID(),
-      start: new Date(),
-      end: "",
-      total: 0,
-      console: poste.name,
-      isActive: true,
-    };
-    addSession(session);
-  };
-
   const activateSession = (id) => {
-    toggleConsoleActivity(id);
+    toggleConsoleActivity(id, poste.isActive);
   };
 
   const handleClose = () => {
-    setRows([]);
-    setTotal(0);
+    console.log("closed modal");
   };
 
   return (
@@ -87,13 +78,13 @@ const Console = ({ poste }) => {
               <div className="d-flex justify-content-between">
                 <button
                   className="btn btn-secondary "
-                  onClick={() => activateSession(poste.id)}
+                  onClick={() => activateSession(poste._id)}
                 >
                   Désactiver la session
                   <i className="bi bi-stop-fill ms-2"></i>
                 </button>
                 <div>
-                  <div className="fs-5">
+                  <div>
                     <span>Début : </span>
                     <span className="green">
                       {new Date(poste.session.start).toLocaleTimeString("fr", {
@@ -107,7 +98,7 @@ const Console = ({ poste }) => {
             {!poste.isActive && (
               <button
                 className="btn btn-primary "
-                onClick={() => activateSession(poste.id)}
+                onClick={() => activateSession(poste._id)}
               >
                 Activer la session
                 <i className="bi bi-play-fill ms-2"></i>
@@ -115,7 +106,7 @@ const Console = ({ poste }) => {
             )}
 
             <div className="h6 my-3 text-center">Ajouter les matchs joués</div>
-            <div className="card p-4 shadow-sm mb-4">
+            <form className="card p-4 shadow-sm mb-4" onSubmit={addRow}>
               <div className="d-flex flex-wrap align-items-end">
                 <div className="form-group me-4">
                   <label className="my-2">Veuillez choisir un jeux</label>
@@ -149,16 +140,18 @@ const Console = ({ poste }) => {
                     className="form-control"
                     name="totalGames"
                     onChange={handleChange}
+                    required={true}
                   />
                 </div>
                 <button
                   className="btn btn-primary mt-4 ms-auto"
-                  onClick={addRow}
+                  disabled={!poste.isActive}
+                  type="sumbit"
                 >
                   Ajouter <i className="fa fa-shopping-cart ms-2" />
                 </button>
               </div>
-            </div>
+            </form>
 
             <table className="table">
               <thead>
@@ -171,7 +164,7 @@ const Console = ({ poste }) => {
                 </tr>
               </thead>
               <tbody>
-                {rows.map((row) => (
+                {poste.games.map((row) => (
                   <tr key={row.id}>
                     <td>{row.game}</td>
                     <td>{row.duration}</td>
@@ -211,7 +204,11 @@ const Console = ({ poste }) => {
             >
               Fermer
             </button>
-            <button type="button" className="btn btn-primary">
+            <button
+              type="button"
+              className="btn btn-primary"
+              disabled={!poste.isActive || !poste.games.length}
+            >
               Encaisser
               <i className="fa fa-credit-card-alt ms-2" />
             </button>

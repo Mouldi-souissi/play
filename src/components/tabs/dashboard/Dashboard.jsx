@@ -4,16 +4,27 @@ import useGlobalStore from "../../../strore";
 import Console from "./Console";
 
 const Dashboard = () => {
-  const [poste, setPost] = useState("");
+  const [poste, setPost] = useState({
+    _id: "",
+    name: "",
+    isActive: false,
+    games: [],
+    session: { start: "", end: "" },
+  });
   const consoles = useGlobalStore((state) => state.consoles);
+  const getStations = useGlobalStore((state) => state.getStations);
 
   const handlePosteClick = (poste) => {
     setPost(poste);
   };
 
   useEffect(() => {
-    if (poste) {
-      const match = consoles.find((c) => c.id === poste.id);
+    getStations();
+  }, []);
+
+  useEffect(() => {
+    if (poste.name) {
+      const match = consoles.find((c) => c._id === poste._id);
       setPost(match);
     }
   }, [consoles]);
@@ -23,10 +34,18 @@ const Dashboard = () => {
       <h4 className="mb-5 text-center sectionTitle">Postes</h4>
       <div className="postes">
         {consoles
-          .sort((a, b) => a.id - b.id)
+          .sort((a, b) => {
+            if (a.name > b.name) {
+              return 1;
+            }
+            if (b.name > a.name) {
+              return -1;
+            }
+            return 0;
+          })
           .map((poste) => (
             <div
-              key={poste.name}
+              key={poste._id}
               className={`poste ${poste.isActive && "poste_active"}`}
               onClick={() => handlePosteClick(poste)}
               data-bs-toggle="modal"
