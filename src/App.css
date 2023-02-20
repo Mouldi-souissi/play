@@ -356,3 +356,50 @@ thead {
   border: 6px solid white;
   filter: drop-shadow(2px 2px 1px rgba(128, 128, 128, 0.795)) !important;
 }
+
+.filterMenu {
+  max-width: 250px;
+}
+
+option:checked {
+  color: white;
+  background-color: var(--green);
+}
+
+select option:hover {
+  box-shadow: 0 0 10px 250px green inset !important;
+  color: white;
+}
+
+/* test */
+.selectMenu {
+  width: 250px;
+  position: relative;
+}
+
+.selectOptions {
+  position: absolute;
+  background: white;
+  width: 100%;
+  left: 0;
+  top: 110%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.selectOptions li {
+  padding: 10px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.466);
+}
+.selectOptions li:hover {
+  background: var(--green);
+  color: white;
+}
+.selectOptions li.active {
+  background: var(--green);
+  color: white;
+  /* filter: drop-shadow(2px 2px 1px rgba(128, 128, 128, 0.795)); */
+}
+
+.selectHeader {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}

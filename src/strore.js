@@ -5,7 +5,7 @@ import decode from "jwt-decode";
 
 const API_URL = "http://localhost:5000/api";
 
-const useGlobalStore = create((set) => ({
+const useGlobalStore = create((set, get) => ({
   isSidebarHidden: false,
   activeTab: "dashboard",
   loggedUser: "",
@@ -40,6 +40,35 @@ const useGlobalStore = create((set) => ({
       })
       .then((res) => {
         set((state) => ({ sessions: [...state.sessions, res.data] }));
+        get().resetStation(session.station.id);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  resetStation: (id) => {
+    set({ isLoading: true });
+    axios
+      .put(
+        `${API_URL}/station/${id}`,
+        {
+          isActive: false,
+          games: [],
+          session: {
+            start: new Date(),
+            end: new Date(),
+          },
+        },
+        {
+          headers: { token: localStorage.getItem("token") },
+        }
+      )
+      .then((res) => {
+        set((state) => ({
+          consoles: [...state.consoles.filter((c) => c._id !== id), res.data],
+        }));
       })
       .catch((err) => console.log(err))
       .finally(() => {

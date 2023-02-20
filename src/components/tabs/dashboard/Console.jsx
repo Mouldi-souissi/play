@@ -59,6 +59,7 @@ const Console = ({ poste }) => {
       total,
     };
     addSession(session);
+    refClose.current.click();
   };
 
   return (
