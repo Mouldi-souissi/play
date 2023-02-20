@@ -116,6 +116,8 @@ ul {
 
 .navlink {
   cursor: pointer;
+  border-radius: 10px;
+  margin: 10px;
 }
 .sidebar ul li {
   display: block;
@@ -123,10 +125,11 @@ ul {
 .sidebar ul li .navlink:hover,
 .sidebar ul li .navlink.active {
   color: white;
-
   background: tomato;
   border-right: 2px solid var(--blueLight);
   filter: drop-shadow(2px 1px 1px rgba(128, 128, 128, 0.479));
+  outline: 3px solid var(--green);
+  outline-offset: -4px;
 }
 
 .sidebar ul li .navlink:hover i,
