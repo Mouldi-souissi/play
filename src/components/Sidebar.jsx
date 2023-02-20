@@ -13,9 +13,15 @@ const Sidebar = () => {
 
   return (
     <div className={`sidebar ${isSidebarHidden ? "hidden" : ""}`}>
+      <div className="d-flex justify-content-center mt-3 mb-2">
+        <img
+          src={userIcon}
+          alt="profile_picture"
+          className="img-fluid userIcon"
+        />
+      </div>
       <div className="profile mb-4">
-        <img src={userIcon} alt="profile_picture" className="img-fluid" />
-        <h5 className="text-center text-white">{username}</h5>
+        <h5 className="text-center text-white text-uppercase">{username}</h5>
       </div>
       <ul>
         {userType === "admin" &&

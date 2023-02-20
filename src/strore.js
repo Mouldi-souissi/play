@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { consoles } from "./db/consoles";
 import games from "./db/games.json";
 import axios from "axios";
 import decode from "jwt-decode";
@@ -16,6 +15,37 @@ const useGlobalStore = create((set) => ({
   games: games,
   isLoading: false,
   users: [],
+  sessions: [],
+
+  getSessions: () => {
+    set({ isLoading: true });
+    axios
+      .get(`${API_URL}/session`, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set({ sessions: res.data });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  addSession: (session) => {
+    set({ isLoading: true });
+    axios
+      .post(`${API_URL}/session`, session, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set((state) => ({ sessions: [...state.sessions, res.data] }));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
 
   getStations: () => {
     set({ isLoading: true });
@@ -102,16 +132,16 @@ const useGlobalStore = create((set) => ({
       icon: "bi bi-controller",
       text: "Postes",
     },
+    {
+      link: "history",
+      icon: "bi bi-clock-history",
+      text: "Historique",
+    },
     { link: "users", icon: "bi bi-people-fill", text: "Utilisateurs" },
     {
       link: "checkout",
       icon: "bi bi-coin",
       text: "Caisse",
-    },
-    {
-      link: "history",
-      icon: "bi bi-clock-history",
-      text: "historique",
     },
     {
       link: "parametres",

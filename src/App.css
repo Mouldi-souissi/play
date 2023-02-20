@@ -49,7 +49,7 @@
 
 .userLogo {
   width: 100px;
-  filter: drop-shadow(2px 2px 2px grey);
+  /* filter: drop-shadow(2px 2px 2px grey); */
   background-position: center center;
 }
 
@@ -344,4 +344,12 @@ thead {
 
 .sectionTitle::first-letter {
   color: var(--green);
+}
+
+.userIcon {
+  background: var(--red);
+  border-radius: 50%;
+  width: 100px;
+  border: 6px solid white;
+  filter: drop-shadow(2px 2px 1px rgba(128, 128, 128, 0.795)) !important;
 }

@@ -13,8 +13,8 @@ const Console = ({ poste }) => {
   const toggleConsoleActivity = useGlobalStore(
     (state) => state.toggleConsoleActivity
   );
+  const addSession = useGlobalStore((state) => state.addSession);
   const refClose = useRef();
-
   const [data, setData] = useState({ game: "FIFA", duration: "10" });
 
   const total = poste.games.reduce((acc, cur) => (acc += cur.total), 0);
@@ -49,6 +49,16 @@ const Console = ({ poste }) => {
 
   const handleClose = () => {
     console.log("closed modal");
+  };
+
+  const handleCheckout = () => {
+    const session = {
+      games: poste.games,
+      start: poste.session.start,
+      station: { name: poste.name, id: poste._id },
+      total,
+    };
+    addSession(session);
   };
 
   return (
@@ -208,6 +218,7 @@ const Console = ({ poste }) => {
               type="button"
               className="btn btn-primary"
               disabled={!poste.isActive || !poste.games.length}
+              onClick={handleCheckout}
             >
               Encaisser
               <i className="fa fa-credit-card-alt ms-2" />
