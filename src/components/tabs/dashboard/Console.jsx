@@ -3,6 +3,7 @@ import consoleLogo from "../../../assets/console.png";
 import useGlobalStore from "../../../strore";
 import { generateUUID } from "../../../functions/generateUUID";
 import { formatCurrency } from "../../../functions/formatCurrency";
+import CustomSelect from "../../CustomSelect";
 
 const Console = ({ poste }) => {
   const games = useGlobalStore((state) => state.games);
@@ -15,12 +16,17 @@ const Console = ({ poste }) => {
   );
   const addSession = useGlobalStore((state) => state.addSession);
   const refClose = useRef();
+
   const [data, setData] = useState({ game: "FIFA", duration: "10" });
 
   const total = poste.games.reduce((acc, cur) => (acc += cur.total), 0);
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const getValues = (name, value) => {
+    setData({ ...data, [name]: value });
   };
 
   const addRow = (e) => {
@@ -117,11 +123,16 @@ const Console = ({ poste }) => {
             )}
 
             <div className="h6 my-3 text-center">Ajouter les matchs joués</div>
-            <form className="card p-4 shadow-sm mb-4" onSubmit={addRow}>
+            <form className="card p-4 mb-4 customShadow" onSubmit={addRow}>
               <div className="d-flex flex-wrap align-items-end">
                 <div className="form-group me-4">
                   <label className="my-2">Veuillez choisir un jeux</label>
-                  <select
+                  <CustomSelect
+                    options={games.map((g) => g.name)}
+                    getSelected={getValues}
+                    name="game"
+                  />
+                  {/* <select
                     className="form-select"
                     onChange={handleChange}
                     name="game"
@@ -131,18 +142,23 @@ const Console = ({ poste }) => {
                         {game.name}
                       </option>
                     ))}
-                  </select>
+                  </select> */}
                 </div>
                 <div className="form-group me-4">
                   <label className="my-2">Veuillez choisir la durée</label>
-                  <select
+                  <CustomSelect
+                    options={["10", "15"]}
+                    getSelected={getValues}
+                    name="duration"
+                  />
+                  {/* <select
                     className="form-select"
                     onChange={handleChange}
                     name="duration"
                   >
                     <option value="10">10 Min</option>
                     <option value="15">15 Min</option>
-                  </select>
+                  </select> */}
                 </div>
                 <div className="form-group">
                   <label className="my-2">Total des matchs</label>

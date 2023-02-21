@@ -1,17 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const CustomSelect = ({ options, getSelected }) => {
+const CustomSelect = ({ options, getSelected, name }) => {
   const [isSelecting, toggleMenu] = useState(false);
   const [selected, setSelected] = useState("");
-  const componetRef = useRef(null);
+  const componentRef = useRef(null);
 
   const handleSelection = (id) => {
     setSelected(id);
-    getSelected(id);
+    getSelected(name, id);
     toggleMenu(false);
   };
   const handleClickOutside = (e) => {
-    if (componetRef.current && !componetRef.current.contains(e.target)) {
+    if (componentRef.current && !componentRef.current.contains(e.target)) {
       toggleMenu(false);
     }
   };
@@ -21,10 +21,10 @@ const CustomSelect = ({ options, getSelected }) => {
     return () => {
       document.removeEventListener("click", handleClickOutside, true);
     };
-  }, [componetRef]);
+  }, [componentRef]);
 
   return (
-    <div className="selectMenu" ref={componetRef}>
+    <div className="selectMenu" ref={componentRef}>
       <div
         className={`d-flex justify-content-between selectHeader p-2 ${
           isSelecting && "active"

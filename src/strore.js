@@ -96,7 +96,7 @@ const useGlobalStore = create((set, get) => ({
     axios
       .put(
         `${API_URL}/station/${id}`,
-        { isActive: !isActive },
+        { isActive: !isActive, session: { start: new Date() } },
         {
           headers: { token: localStorage.getItem("token") },
         }

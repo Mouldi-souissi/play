@@ -11,15 +11,23 @@ const Sessions = () => {
   const getSessions = useGlobalStore((state) => state.getSessions);
   const [periodFilter, setPeriodFilter] = useState("Ce jour");
   const [stationFilter, setStationFilter] = useState("Postes");
+  const [filters, setFilter] = useState({
+    period: "Ce jour",
+    station: "Postes",
+  });
   let filteredSession = sessions;
   const optionsStation = [
     "Postes",
     ...new Set(sessions.map((session) => session.station.name)),
   ];
 
-  if (stationFilter !== "Postes") {
+  const getValues = (name, value) => {
+    setFilter({ ...filters, [name]: value });
+  };
+
+  if (filters.station !== "Postes") {
     filteredSession = sessions.filter(
-      (session) => session.station.name === stationFilter
+      (session) => session.station.name === filters.station
     );
   } else {
     filteredSession = sessions;
@@ -33,8 +41,16 @@ const Sessions = () => {
     <div className="container tabContent">
       <h4 className="sectionTitle text-center mb-5">historique</h4>
       <div className="filters mb-2 d-flex align-items-center justify-content-between">
-        <CustomSelect options={optionsStation} getSelected={setStationFilter} />
-        <CustomSelect options={optionsPeriod} getSelected={setPeriodFilter} />
+        <CustomSelect
+          options={optionsStation}
+          getSelected={getValues}
+          name="station"
+        />
+        <CustomSelect
+          options={optionsPeriod}
+          getSelected={getValues}
+          name="period"
+        />
       </div>
       <div className="table-responsive">
         <table className="table">
