@@ -1,6 +1,6 @@
 :root {
   --red: tomato;
-  --purple: #1571e0;
+  --purple: #00ccff;
   --green: #02c7ba;
   --yellow: rgba(255, 238, 0, 0.438);
 }
@@ -125,22 +125,22 @@ ul {
 .sidebar ul li .navlink:hover,
 .sidebar ul li .navlink.active {
   color: white;
-  background: tomato;
-  border-right: 2px solid var(--blueLight);
+  background: transparent;
+  /* border-right: 2px solid var(--blueLight); */
   filter: drop-shadow(2px 1px 1px rgba(128, 128, 128, 0.479));
   outline: 1px solid white;
   outline-offset: -4px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar ul li .navlink:hover i,
 .sidebar ul li .navlink.active i {
-  /* color: black; */
-  filter: drop-shadow(2px 2px 1px rgba(128, 128, 128, 0.479));
+  color: var(--red);
 }
 
-/* i {
+i {
   filter: drop-shadow(1px 1px 0px rgba(128, 128, 128, 0.144)) !important;
-} */
+}
 
 .sidebar ul li .navlink:hover:before,
 .sidebar ul li .navlink.active:before {
@@ -151,24 +151,33 @@ ul {
   display: block;
   padding: 13px 30px;
   border-bottom: 1px solid var(--blueLight);
-  color: rgb(241, 237, 237);
+  color: white;
   font-size: 16px;
   position: relative;
   font-weight: bold;
-  /* text-shadow: 1px 0px 0px grey; */
+  filter: drop-shadow(2px 1px 1px rgba(128, 128, 128, 0.479));
 }
 
 .sidebar ul li .navlink i {
   color: white;
-  width: 30px;
-  height: 30px;
+  margin-right: 10px;
   display: inline-block;
-  font-size: 20px;
+  font-size: 22px !important;
+  font-weight: 900;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  position: relative;
 }
-
-.sidebar ul li .navlink .icon {
-  margin-right: 20px;
-}
+/* .sidebar ul li .navlink i::after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  width: 25px;
+  background: var(--red);
+  bottom: -5px;
+  left: 0;
+} */
 
 .content {
   height: 100%;
@@ -409,4 +418,8 @@ thead {
 }
 .selectHeader.active {
   outline: 1px solid #02c7ba98;
+}
+
+.tabContent {
+  min-height: 600px;
 }

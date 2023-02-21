@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const CustomSelect = ({ options }) => {
+const CustomSelect = ({ options, getSelected }) => {
   const [isSelecting, toggleMenu] = useState(false);
   const [selected, setSelected] = useState("");
   const componetRef = useRef(null);
 
   const handleSelection = (id) => {
     setSelected(id);
+    getSelected(id);
     toggleMenu(false);
   };
   const handleClickOutside = (e) => {

@@ -1,25 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { formatCurrency } from "../../../functions/formatCurrency";
 import useGlobalStore from "../../../strore";
 import CustomSelect from "../../CustomSelect";
+import SessionDetails from "./SessionDetails";
 
-const options = ["Postes", "P1", "P2", "P3"];
-const optionsPeriod = ["Tout", "Ce jour", "Cette semaine", "Ce mois"];
+const optionsPeriod = ["Ce jour", "Cette semaine", "Ce mois", "Tout"];
 
 const Sessions = () => {
   const sessions = useGlobalStore((state) => state.sessions);
   const getSessions = useGlobalStore((state) => state.getSessions);
+  const [periodFilter, setPeriodFilter] = useState("Ce jour");
+  const [stationFilter, setStationFilter] = useState("Postes");
+  let filteredSession = sessions;
+  const optionsStation = [
+    "Postes",
+    ...new Set(sessions.map((session) => session.station.name)),
+  ];
+
+  if (stationFilter !== "Postes") {
+    filteredSession = sessions.filter(
+      (session) => session.station.name === stationFilter
+    );
+  } else {
+    filteredSession = sessions;
+  }
 
   useEffect(() => {
     getSessions();
   }, []);
 
   return (
-    <div className="container h-100">
+    <div className="container tabContent">
       <h4 className="sectionTitle text-center mb-5">historique</h4>
       <div className="filters mb-2 d-flex align-items-center justify-content-between">
-        <CustomSelect options={options} />
-        <CustomSelect options={optionsPeriod} />
+        <CustomSelect options={optionsStation} getSelected={setStationFilter} />
+        <CustomSelect options={optionsPeriod} getSelected={setPeriodFilter} />
       </div>
       <div className="table-responsive">
         <table className="table">
@@ -34,12 +49,12 @@ const Sessions = () => {
             </tr>
           </thead>
           <tbody>
-            {sessions
-              // .sort((a, b) => {
-              //   if (a._id < b._id) return 1;
-              //   if (a._id > b._id) return -1;
-              //   return 0;
-              // })
+            {filteredSession
+              .sort((a, b) => {
+                if (new Date(a.end) < new Date(b.end)) return 1;
+                if (new Date(a.end) > new Date(b.end)) return -1;
+                return 0;
+              })
               .map((session) => (
                 <tr key={session._id}>
                   <td>{session.station.name}</td>
@@ -64,7 +79,7 @@ const Sessions = () => {
                       <i
                         className="bi bi-search "
                         data-bs-toggle="modal"
-                        data-bs-target="#editUser"
+                        data-bs-target="#sessionDetails"
                         // onClick={() => setUser(session)}
                       ></i>
                     </button>
@@ -82,6 +97,7 @@ const Sessions = () => {
           </tbody>
         </table>
       </div>
+      <SessionDetails />
     </div>
   );
 };
