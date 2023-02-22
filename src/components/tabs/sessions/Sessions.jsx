@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { formatCurrency } from "../../../functions/formatCurrency";
 import useGlobalStore from "../../../strore";
 import CustomSelect from "../../CustomSelect";
+import Pagination from "../../Pagination";
 import SessionDetails from "./SessionDetails";
 
 const optionsPeriod = ["Ce jour", "Cette semaine", "Ce mois", "Tout"];
@@ -15,7 +16,27 @@ const Sessions = () => {
     period: "Ce jour",
     station: "Postes",
   });
-  let filteredSession = sessions;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(8);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+
+  let currentSessions = sessions.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const nextPage = (pageNumbers) => {
+    if (currentPage + 1 <= pageNumbers[pageNumbers.length - 1]) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+  const previousPage = (pageNumbers) => {
+    if (currentPage - 1 >= pageNumbers[0]) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  let filteredSessions = currentSessions;
   const optionsStation = [
     "Postes",
     ...new Set(sessions.map((session) => session.station.name)),
@@ -26,11 +47,11 @@ const Sessions = () => {
   };
 
   if (filters.station !== "Postes") {
-    filteredSession = sessions.filter(
+    filteredSessions = currentSessions.filter(
       (session) => session.station.name === filters.station
     );
   } else {
-    filteredSession = sessions;
+    filteredSessions = currentSessions;
   }
 
   useEffect(() => {
@@ -65,7 +86,7 @@ const Sessions = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredSession
+            {currentSessions
               .sort((a, b) => {
                 if (new Date(a.end) < new Date(b.end)) return 1;
                 if (new Date(a.end) > new Date(b.end)) return -1;
@@ -112,6 +133,17 @@ const Sessions = () => {
               ))}
           </tbody>
         </table>
+      </div>
+      <div className="d-flex align-items-center justify-content-center mb-5">
+        <Pagination
+          className="pt-5"
+          postsPerPage={postsPerPage}
+          totalMoves={sessions.length}
+          paginate={paginate}
+          nextPage={nextPage}
+          previousPage={previousPage}
+          currentPage={currentPage}
+        />
       </div>
       <SessionDetails />
     </div>

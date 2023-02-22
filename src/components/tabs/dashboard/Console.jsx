@@ -210,7 +210,7 @@ const Console = ({ poste }) => {
               </tbody>
               <tfoot className="table-dark">
                 <tr>
-                  <td>Total</td>
+                  <td className="fw-bold">Total</td>
                   <td></td>
                   <td></td>
                   <td></td>

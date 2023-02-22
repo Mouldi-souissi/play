@@ -242,7 +242,7 @@ i {
 
 .table {
   border-collapse: separate;
-  border-spacing: 0 0.4em;
+  border-spacing: 0 0.5em;
   min-width: 500px;
   padding-right: 10px;
 }
@@ -258,6 +258,10 @@ td:last-child {
 
 .table thead {
   background: tomato !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.table thead th {
+  vertical-align: middle !important;
 }
 
 .table thead th:first-child {
@@ -276,19 +280,26 @@ td:last-child {
 
 tbody tr {
   background: white;
-  vertical-align: middle;
   /* filter: drop-shadow(1px 0px 1px rgba(128, 128, 128, 0.795)); */
   color: #38454f;
   /* outline: 2px solid rgba(128, 128, 128, 0.377); */
   outline-offset: -5px;
   border-radius: 10px;
-  box-shadow: inset 1px 1px 2px rgba(128, 128, 128, 0.527),
-    1px 1px 2px rgba(128, 128, 128, 0.527);
+  /* box-shadow: inset 1px 1px 2px rgba(128, 128, 128, 0.527),
+    1px 1px 2px rgba(128, 128, 128, 0.527); */
+  height: 60px !important;
+  vertical-align: middle !important;
+  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 thead {
   background: linear-gradient(var(--blueDark), var(--blueDark));
   color: white;
+  height: 60px !important;
+}
+
+tfoot tr {
+  height: 60px !important;
 }
 
 .btn-primary {
