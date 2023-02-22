@@ -1,6 +1,6 @@
 :root {
   --red: tomato;
-  --purple: #00ccff;
+  --purple: #00b7ff;
   --green: #02c7ba;
   --yellow: rgba(255, 238, 0, 0.438);
 }
@@ -60,8 +60,7 @@
 
 /* sidebar */
 .sidebar {
-  /* background: linear-gradient(var(--green), var(--purple)); */
-  background: var(--purple);
+  background: linear-gradient(var(--green) 30%, var(--purple));
   position: fixed;
   top: 0;
   left: 0;
