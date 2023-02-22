@@ -60,7 +60,7 @@
 
 /* sidebar */
 .sidebar {
-  background: linear-gradient(var(--green) 30%, var(--purple));
+  background: linear-gradient(var(--green) 50%, var(--purple));
   position: fixed;
   top: 0;
   left: 0;
@@ -287,7 +287,7 @@ tbody tr {
   border-radius: 10px;
   /* box-shadow: inset 1px 1px 2px rgba(128, 128, 128, 0.527),
     1px 1px 2px rgba(128, 128, 128, 0.527); */
-  height: 60px !important;
+  height: 50px !important;
   vertical-align: middle !important;
   box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.1);
 }
@@ -295,11 +295,11 @@ tbody tr {
 thead {
   background: linear-gradient(var(--blueDark), var(--blueDark));
   color: white;
-  height: 60px !important;
+  height: 50px !important;
 }
 
 tfoot tr {
-  height: 60px !important;
+  height: 50px !important;
 }
 
 .btn-primary {

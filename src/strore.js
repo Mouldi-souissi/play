@@ -17,10 +17,10 @@ const useGlobalStore = create((set, get) => ({
   users: [],
   sessions: [],
 
-  getSessions: () => {
+  getSessions: (period = "daily") => {
     set({ isLoading: true });
     axios
-      .get(`${API_URL}/session`, {
+      .get(`${API_URL}/session/${period}`, {
         headers: { token: localStorage.getItem("token") },
       })
       .then((res) => {

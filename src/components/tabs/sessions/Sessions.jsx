@@ -6,12 +6,16 @@ import Pagination from "../../Pagination";
 import SessionDetails from "./SessionDetails";
 
 const optionsPeriod = ["Ce jour", "Cette semaine", "Ce mois", "Tout"];
+const periodDic = {
+  "Ce jour": "daily",
+  "Cette semaine": "weekly",
+  "Ce mois": "monthly",
+  Tout: "all",
+};
 
 const Sessions = () => {
   const sessions = useGlobalStore((state) => state.sessions);
   const getSessions = useGlobalStore((state) => state.getSessions);
-  const [periodFilter, setPeriodFilter] = useState("Ce jour");
-  const [stationFilter, setStationFilter] = useState("Postes");
   const [filters, setFilter] = useState({
     period: "Ce jour",
     station: "Postes",
@@ -36,7 +40,6 @@ const Sessions = () => {
     }
   };
 
-  let filteredSessions = currentSessions;
   const optionsStation = [
     "Postes",
     ...new Set(sessions.map((session) => session.station.name)),
@@ -46,13 +49,13 @@ const Sessions = () => {
     setFilter({ ...filters, [name]: value });
   };
 
-  if (filters.station !== "Postes") {
-    filteredSessions = currentSessions.filter(
+  useEffect(() => {
+    getSessions(periodDic[filters.period]);
+
+    currentSessions = sessions.filter(
       (session) => session.station.name === filters.station
     );
-  } else {
-    filteredSessions = currentSessions;
-  }
+  }, [filters]);
 
   useEffect(() => {
     getSessions();
