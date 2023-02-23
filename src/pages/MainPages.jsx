@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Checkout from "../components/tabs/checkout/Checkout";
 import Dashboard from "../components/tabs/dashboard/Dashboard";
+import Games from "../components/tabs/games/Games";
 import Sessions from "../components/tabs/sessions/Sessions";
 import Users from "../components/tabs/users/Users";
 import useGlobalStore from "../strore";
@@ -25,6 +26,9 @@ const MainPage = () => {
     }
     if (activeTab === "history") {
       return <Sessions />;
+    }
+    if (activeTab === "games") {
+      return <Games />;
     }
   };
   const handleLogout = () => {

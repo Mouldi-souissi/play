@@ -17,6 +17,70 @@ const useGlobalStore = create((set, get) => ({
   users: [],
   sessions: [],
 
+  getGames: () => {
+    set({ isLoading: true });
+    axios
+      .get(`${API_URL}/game`, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set({ games: res.data });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  addGame: (game) => {
+    set({ isLoading: true });
+    axios
+      .post(`${API_URL}/game`, game, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set((state) => ({ games: [...state.games, res.data] }));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  deleteGame: (id) => {
+    set({ isLoading: true });
+    axios
+      .delete(`${API_URL}/game/${id}`, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set((state) => ({
+          games: state.games.filter((game) => game._id !== id),
+        }));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  editGame: (id) => {
+    set({ isLoading: true });
+    axios
+      .put(`${API_URL}/game/${id}`, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set((state) => ({
+          games: [...state.games.filter((game) => game._id !== id), res.data],
+        }));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
   getSessions: (period = "daily") => {
     set({ isLoading: true });
     axios
@@ -173,9 +237,9 @@ const useGlobalStore = create((set, get) => ({
       text: "Caisse",
     },
     {
-      link: "parametres",
-      icon: "bi bi-gear",
-      text: "Parametres",
+      link: "games",
+      icon: "bi bi-disc",
+      text: "Jeux",
     },
   ],
   userRoutes: [

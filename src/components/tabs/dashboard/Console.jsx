@@ -87,7 +87,6 @@ const Console = ({ poste }) => {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              style={{ fontSize: "10px" }}
             ></button>
           </div>
           <div className="modal-body">
