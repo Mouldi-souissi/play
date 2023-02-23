@@ -430,3 +430,20 @@ tfoot tr {
 .btn-close {
   font-size: 10px;
 }
+
+#addGame .modal-content {
+  min-height: 100vh;
+}
+
+input {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  height: 40px !important;
+  border-radius: 10px !important;
+}
+input:focus {
+  border-color: var(--green) !important;
+}
+
+.form-floating > label {
+  padding: 10px !important;
+}
