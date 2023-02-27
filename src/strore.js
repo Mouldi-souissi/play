@@ -12,7 +12,7 @@ const useGlobalStore = create((set, get) => ({
   username: "",
   userType: "",
   consoles: [],
-  games: games,
+  games: [],
   isLoading: false,
   users: [],
   sessions: [],

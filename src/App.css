@@ -445,5 +445,10 @@ input:focus {
 }
 
 .form-floating > label {
-  padding: 10px !important;
+  margin-top: -10px !important;
+}
+
+.game {
+  max-width: 400px;
+  margin: 20px;
 }

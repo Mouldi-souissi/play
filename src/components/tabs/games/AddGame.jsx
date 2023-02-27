@@ -1,9 +1,11 @@
 import React, { useRef, useState } from "react";
+import { generateUUID } from "../../../functions/generateUUID";
 import useGlobalStore from "../../../strore";
 import CustomSelect from "../../CustomSelect";
 
 const AddGame = () => {
-  const [data, setData] = useState({ type: "utilisateur" });
+  const [data, setData] = useState({ name: "", logo: "", prices: [] });
+  const [tariff, setTariff] = useState("");
   const addGame = useGlobalStore((state) => state.addGame);
   const refClose = useRef();
 
@@ -13,12 +15,23 @@ const AddGame = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addUser(data);
+    addGame(data);
     refClose.current.click();
   };
 
-  const handleTariffType = (name, value) => {
-    console.log({ name, value });
+  const handleTariff = (name, value) => {
+    setTariff({ ...tariff, [name]: value });
+  };
+
+  const addTarif = () => {
+    setData({
+      ...data,
+      prices: [...data.prices, { ...tariff, id: generateUUID() }],
+    });
+  };
+
+  const handlePrice = (e) => {
+    setTariff({ ...tariff, [e.target.name]: e.target.value });
   };
   return (
     <div className="modal fade" id="addGame" tabIndex="-1" aria-hidden="true">
@@ -64,27 +77,67 @@ const AddGame = () => {
                 </div>
               </div>
               <div className="d-flex align-items-center p-4">
-                <div className="fw-bold me-3">Tarif</div>
-                <button className="btn btn-outline-primary py-0 px-1">
+                <div className="fw-bold">Tarif</div>
+              </div>
+              <div className="d-flex align-items-end">
+                <div className="me-3">
+                  <label className="mb-2">Durée</label>
+                  <CustomSelect
+                    options={["10 Min", "15 Min", "1 h"]}
+                    getSelected={handleTariff}
+                    name="duration"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-2">Prix</label>
+                  <div className="form-floating me-3">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Prix"
+                      name="price"
+                      onChange={handlePrice}
+                    />
+                    <label>Prix</label>
+                  </div>
+                </div>
+                <button
+                  className="btn btn-outline-primary py-1"
+                  type="button"
+                  onClick={addTarif}
+                >
                   <i className="bi bi-plus h3"></i>
                 </button>
               </div>
-              <div className="p-4">
-                <label className="mb-2">Mode de paiement</label>
-                <CustomSelect
-                  options={["Par heure", "Par match"]}
-                  getSelected={handleTariffType}
-                />
-              </div>
-              <div className="form-floating mb-3">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Nom"
-                  name="logo"
-                  onChange={handleInput}
-                />
-                <label>Logo</label>
+              <div className="table-responsive">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Durée</th>
+                      <th scope="col">Prix</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.prices?.map((el) => (
+                      <tr key={el.id}>
+                        <td>{el.duration}</td>
+                        <td>{el.price}</td>
+                        <td>
+                          <button className="btn btn-transparent p-0">
+                            <i
+                              className="bi bi-trash3 red"
+                              data-bs-toggle="modal"
+                              data-bs-target="#deleteUser"
+                              // onClick={() => setDeleteData(session)}
+                            ></i>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
             <div className="modal-footer">
