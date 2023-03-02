@@ -20,6 +20,7 @@ const Sessions = () => {
     period: "Ce jour",
     station: "Postes",
   });
+  const [session, setSession] = useState({ games: [] });
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
@@ -120,17 +121,17 @@ const Sessions = () => {
                         className="bi bi-search "
                         data-bs-toggle="modal"
                         data-bs-target="#sessionDetails"
-                        // onClick={() => setUser(session)}
+                        onClick={() => setSession(session)}
                       ></i>
                     </button>
-                    <button className="btn btn-transparent p-0">
+                    {/* <button className="btn btn-transparent p-0">
                       <i
                         className="bi bi-trash3 red"
                         data-bs-toggle="modal"
                         data-bs-target="#deleteUser"
-                        // onClick={() => setDeleteData(session)}
+      
                       ></i>
-                    </button>
+                    </button> */}
                   </td>
                 </tr>
               ))}
@@ -148,7 +149,7 @@ const Sessions = () => {
           currentPage={currentPage}
         />
       </div>
-      <SessionDetails />
+      <SessionDetails session={session} />
     </div>
   );
 };

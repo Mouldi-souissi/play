@@ -7,6 +7,7 @@ import CustomSelect from "../../CustomSelect";
 
 const Console = ({ poste }) => {
   const games = useGlobalStore((state) => state.games);
+  const getGames = useGlobalStore((state) => state.getGames);
   const addGameToSession = useGlobalStore((state) => state.addGameToSession);
   const deleteGameFromSession = useGlobalStore(
     (state) => state.deleteGameFromSession
@@ -17,7 +18,7 @@ const Console = ({ poste }) => {
   const addSession = useGlobalStore((state) => state.addSession);
   const refClose = useRef();
 
-  const [data, setData] = useState({ game: "FIFA", duration: "10" });
+  const [data, setData] = useState({ game: "FIFA", duration: "10 Min" });
 
   const total = poste.games.reduce((acc, cur) => (acc += cur.total), 0);
 
@@ -44,9 +45,10 @@ const Console = ({ poste }) => {
 
   const calculateTotalRow = (row) => {
     const match = games.find((game) => game.name === row.game);
-    const cost = match["cost"].find((c) => c.duration === Number(row.duration));
+    console.log(match);
+    const cost = match["prices"].find((c) => c.duration === row.duration);
 
-    return cost["cost"] * Number(row.totalGames);
+    return cost["price"] * Number(row.totalGames);
   };
 
   const activateSession = (id) => {
@@ -67,6 +69,10 @@ const Console = ({ poste }) => {
     addSession(session);
     refClose.current.click();
   };
+
+  useEffect(() => {
+    getGames();
+  }, []);
 
   return (
     <div
@@ -122,7 +128,7 @@ const Console = ({ poste }) => {
             )}
 
             <div className="h6 my-3 text-center">Ajouter les matchs joués</div>
-            <form className="card p-4 mb-4 customShadow" onSubmit={addRow}>
+            <form className="card p-4 mb-4 shadow-sm" onSubmit={addRow}>
               <div className="d-flex flex-wrap align-items-end">
                 <div className="form-group me-4">
                   <label className="my-2">Veuillez choisir un jeux</label>
@@ -146,7 +152,7 @@ const Console = ({ poste }) => {
                 <div className="form-group me-4">
                   <label className="my-2">Veuillez choisir la durée</label>
                   <CustomSelect
-                    options={["10", "15"]}
+                    options={["10 Min", "15 Min"]}
                     getSelected={getValues}
                     name="duration"
                   />

@@ -50,7 +50,7 @@ const AddGame = () => {
             <div className="modal-body">
               <div className="row">
                 <div className="col-lg-6">
-                  <div className="form-floating mb-3 ">
+                  <div className="mb-3">
                     <input
                       type="text"
                       className="form-control"
@@ -60,55 +60,54 @@ const AddGame = () => {
                       required
                       autoComplete="off"
                     />
-                    <label>Nom</label>
                   </div>
                 </div>
                 <div className="col-lg-6">
-                  <div className="form-floating mb-3">
+                  <div className="mb-3">
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Nom"
+                      placeholder="Logo"
                       name="logo"
                       onChange={handleInput}
                     />
-                    <label>Logo</label>
                   </div>
                 </div>
               </div>
-              <div className="d-flex align-items-center p-4">
-                <div className="fw-bold">Tarif</div>
-              </div>
-              <div className="d-flex align-items-end">
-                <div className="me-3">
-                  <label className="mb-2">Durée</label>
-                  <CustomSelect
-                    options={["10 Min", "15 Min", "1 h"]}
-                    getSelected={handleTariff}
-                    name="duration"
-                  />
+              <div className="p-4">
+                <div className="d-flex align-items-center mb-2">
+                  <div className="fw-bold">Tarif</div>
                 </div>
-
-                <div>
-                  <label className="mb-2">Prix</label>
-                  <div className="form-floating me-3">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Prix"
-                      name="price"
-                      onChange={handlePrice}
+                <div className="d-flex align-items-end">
+                  <div className="me-3">
+                    <label className="mb-2">Durée</label>
+                    <CustomSelect
+                      options={["10 Min", "15 Min", "1 h"]}
+                      getSelected={handleTariff}
+                      name="duration"
                     />
-                    <label>Prix</label>
                   </div>
+
+                  <div>
+                    <label className="mb-2">Prix</label>
+                    <div className="me-3">
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Prix"
+                        name="price"
+                        onChange={handlePrice}
+                      />
+                    </div>
+                  </div>
+                  <button
+                    className="btn btn-outline-primary py-1"
+                    type="button"
+                    onClick={addTarif}
+                  >
+                    <i className="bi bi-plus h3"></i>
+                  </button>
                 </div>
-                <button
-                  className="btn btn-outline-primary py-1"
-                  type="button"
-                  onClick={addTarif}
-                >
-                  <i className="bi bi-plus h3"></i>
-                </button>
               </div>
               <div className="table-responsive">
                 <table className="table">

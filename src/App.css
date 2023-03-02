@@ -410,7 +410,7 @@ tfoot tr {
 }
 
 .selectHeader {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
   border-radius: 10px;
   outline: 1px solid rgba(128, 128, 128, 0.253);
   background: white;
@@ -425,6 +425,7 @@ tfoot tr {
 
 .customShadow {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
 }
 
 .btn-close {
@@ -436,9 +437,11 @@ tfoot tr {
 }
 
 input {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
   height: 40px !important;
   border-radius: 10px !important;
+  outline: 1px solid rgba(128, 128, 128, 0.253);
+  border: none !important;
 }
 input:focus {
   border-color: var(--green) !important;
