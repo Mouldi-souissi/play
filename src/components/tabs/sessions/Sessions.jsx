@@ -14,6 +14,7 @@ const periodDic = {
 };
 
 const Sessions = () => {
+  const consoles = useGlobalStore((state) => state.consoles);
   const sessions = useGlobalStore((state) => state.sessions);
   const getSessions = useGlobalStore((state) => state.getSessions);
   const [filters, setFilter] = useState({
@@ -41,17 +42,18 @@ const Sessions = () => {
     }
   };
 
-  const optionsStation = [
-    "Postes",
-    ...new Set(sessions.map((session) => session.station.name)),
-  ];
+  // const optionsStation = [
+  //   "Postes",
+  //   ...new Set(sessions.map((session) => session.station.name)),
+  // ];
+  const optionsStation = ["Postes", ...consoles.map((c) => c.name)];
 
   const getValues = (name, value) => {
     setFilter({ ...filters, [name]: value });
   };
 
   useEffect(() => {
-    getSessions(periodDic[filters.period]);
+    getSessions(periodDic[filters.period], filters.station);
 
     currentSessions = sessions.filter(
       (session) => session.station.name === filters.station

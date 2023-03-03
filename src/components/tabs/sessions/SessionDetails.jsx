@@ -2,7 +2,6 @@ import React from "react";
 import { formatCurrency } from "../../../functions/formatCurrency";
 
 const SessionDetails = ({ session }) => {
-  console.log(session);
   return (
     <div
       className="modal fade"
