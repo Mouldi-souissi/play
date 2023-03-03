@@ -229,7 +229,7 @@ const Console = ({ poste }) => {
           <div className="modal-footer">
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-transparent"
               data-bs-dismiss="modal"
               ref={refClose}
               onClick={handleClose}
