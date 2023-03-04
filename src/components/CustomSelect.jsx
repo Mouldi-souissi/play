@@ -1,8 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const CustomSelect = ({ options, getSelected, name }) => {
+const CustomSelect = ({
+  options,
+  getSelected,
+  name,
+  defaultSelectedOption,
+}) => {
   const [isSelecting, toggleMenu] = useState(false);
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState(defaultSelectedOption);
   const componentRef = useRef(null);
 
   const handleSelection = (id) => {
@@ -10,6 +15,7 @@ const CustomSelect = ({ options, getSelected, name }) => {
     getSelected(name, id);
     toggleMenu(false);
   };
+
   const handleClickOutside = (e) => {
     if (componentRef.current && !componentRef.current.contains(e.target)) {
       toggleMenu(false);
@@ -23,6 +29,10 @@ const CustomSelect = ({ options, getSelected, name }) => {
     };
   }, [componentRef]);
 
+  useEffect(() => {
+    setSelected(defaultSelectedOption);
+  }, [options, getSelected, name, defaultSelectedOption]);
+
   return (
     <div className="selectMenu" ref={componentRef}>
       <div
@@ -31,7 +41,7 @@ const CustomSelect = ({ options, getSelected, name }) => {
         }`}
         onClick={() => toggleMenu(!isSelecting)}
       >
-        <span>{selected ? selected : options[0]}</span>
+        <span>{selected}</span>
         <i className="bi bi-chevron-down"></i>
       </div>
       {isSelecting && (

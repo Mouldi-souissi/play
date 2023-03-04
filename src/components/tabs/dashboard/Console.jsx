@@ -74,6 +74,8 @@ const Console = ({ poste }) => {
     getGames();
   }, []);
 
+  const gameOptions = games.map((g) => g.name);
+
   return (
     <div
       className="modal fade"
@@ -133,9 +135,10 @@ const Console = ({ poste }) => {
                 <div className="form-group me-4">
                   <label className="my-2">Veuillez choisir un jeux</label>
                   <CustomSelect
-                    options={games.map((g) => g.name)}
+                    options={gameOptions}
                     getSelected={getValues}
                     name="game"
+                    defaultSelectedOption={data.game}
                   />
                   {/* <select
                     className="form-select"
@@ -155,6 +158,7 @@ const Console = ({ poste }) => {
                     options={["10 Min", "15 Min"]}
                     getSelected={getValues}
                     name="duration"
+                    defaultSelectedOption={data.duration}
                   />
                   {/* <select
                     className="form-select"
@@ -173,6 +177,7 @@ const Console = ({ poste }) => {
                     name="totalGames"
                     onChange={handleChange}
                     required={true}
+                    placeholder="0"
                   />
                 </div>
                 <button
@@ -225,26 +230,27 @@ const Console = ({ poste }) => {
                 </tr>
               </tfoot>
             </table>
-          </div>
-          <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-transparent"
-              data-bs-dismiss="modal"
-              ref={refClose}
-              onClick={handleClose}
-            >
-              Fermer
-            </button>
-            <button
-              type="button"
-              className="btn btn-primary"
-              disabled={!poste.isActive || !poste.games.length}
-              onClick={handleCheckout}
-            >
-              Encaisser
-              <i className="fa fa-credit-card-alt ms-2" />
-            </button>
+
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-transparent"
+                data-bs-dismiss="modal"
+                ref={refClose}
+                onClick={handleClose}
+              >
+                Fermer
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary"
+                disabled={!poste.isActive || !poste.games.length}
+                onClick={handleCheckout}
+              >
+                Encaisser
+                <i className="fa fa-credit-card-alt ms-2" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -21,7 +21,7 @@ function Pagination({
           className="btn btn-sm font-weight-bold me-2"
           onClick={() => previousPage(pageNumbers)}
         >
-          <i class="bi bi-chevron-left"></i>
+          <i className="bi bi-chevron-left"></i>
         </button>
         {pageNumbers.map((number) => (
           <li key={number} className="page-item me-2">
@@ -40,7 +40,7 @@ function Pagination({
           className="btn btn-sm  font-weight-bold me-2"
           onClick={() => nextPage(pageNumbers)}
         >
-          <i class="bi bi-chevron-right"></i>
+          <i className="bi bi-chevron-right"></i>
         </button>
       </div>
       <div>

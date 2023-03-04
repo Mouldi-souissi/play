@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import useGlobalStore from "../../../strore";
+import CustomSelect from "../../CustomSelect";
 
 const EditUser = ({ user }) => {
   const [data, setData] = useState({ name: "", type: "" });
@@ -21,6 +22,7 @@ const EditUser = ({ user }) => {
       setData(user);
     }
   }, [user]);
+
   return (
     <div
       className="modal fade"
@@ -43,7 +45,8 @@ const EditUser = ({ user }) => {
             ></button>
           </div>
           <div className="modal-body">
-            <div className="form-floating mb-3">
+            <div className="form-group mb-3">
+              <label className="mb-2">Nom</label>
               <input
                 type="text"
                 className="form-control"
@@ -54,9 +57,9 @@ const EditUser = ({ user }) => {
                 required
                 autoComplete="off"
               />
-              <label>Nom</label>
             </div>
-            <div className="form-floating mb-3">
+
+            {/* <div className="form-floating mb-3">
               <select
                 className="form-select"
                 name="type"
@@ -67,6 +70,17 @@ const EditUser = ({ user }) => {
                 <option value="admin">Admin</option>
               </select>
               <label>Type</label>
+            </div> */}
+            <div className="mb-3">
+              <label className="mb-2">Type</label>
+              <CustomSelect
+                options={["admin", "utilisateur"]}
+                getSelected={(name, value) => {
+                  setData({ ...data, type: value });
+                }}
+                name="type"
+                defaultSelectedOption={data.type}
+              />
             </div>
           </div>
           <div className="modal-footer">

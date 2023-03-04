@@ -72,11 +72,13 @@ const Sessions = () => {
           options={optionsStation}
           getSelected={getValues}
           name="station"
+          defaultSelectedOption={filters.station}
         />
         <CustomSelect
           options={optionsPeriod}
           getSelected={getValues}
           name="period"
+          defaultSelectedOption={filters.period}
         />
       </div>
       <div className="table-responsive">

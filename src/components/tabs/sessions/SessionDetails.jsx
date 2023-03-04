@@ -21,11 +21,11 @@ const SessionDetails = ({ session }) => {
             ></button>
           </div>
           <div className="modal-body">
-            <ol class="list-group ">
+            <ol className="list-group ">
               {session.games.map((game) => (
                 <li
                   key={game.id}
-                  class="list-group-item d-flex justify-content-between"
+                  className="list-group-item d-flex justify-content-between"
                 >
                   <span>
                     <span> {game.game}</span>
@@ -39,7 +39,7 @@ const SessionDetails = ({ session }) => {
           <div className="modal-footer">
             <button
               type="button"
-              className="btn btn-transparent"
+              className="btn btn-primary"
               data-bs-dismiss="modal"
             >
               Close

@@ -10,9 +10,11 @@ const Users = () => {
   const isLoading = useGlobalStore((state) => state.isLoading);
   const [deleteData, setDeleteData] = useState("");
   const [user, setUser] = useState("");
+
   useEffect(() => {
     getUsers();
   }, []);
+
   return (
     <div className="container">
       <div className="d-flex align-items-baseline justify-content-center mb-5">
