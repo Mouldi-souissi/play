@@ -19,11 +19,10 @@ const Sidebar = () => {
           alt="profile_picture"
           className="img-fluid userIcon"
         />
-        {/* <div className="profile mb-4"> */}
+
         <h6 className="text-center text-dark text-uppercase ms-3">
           {username}
         </h6>
-        {/* </div> */}
       </div>
 
       <ul>
