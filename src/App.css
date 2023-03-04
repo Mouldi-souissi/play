@@ -138,8 +138,9 @@ ul {
   color: var(--red);
 }
 
-i {
+i::before {
   filter: drop-shadow(1px 1px 0px rgba(128, 128, 128, 0.144)) !important;
+  animation: rotation2 2s infinite linear;
 }
 
 .sidebar ul li .navlink:hover:before,
@@ -215,6 +216,11 @@ i {
   animation: rotation 2s infinite linear;
 }
 
+tbody .btn .bi {
+  margin: 0 auto !important;
+  font-size: 18px;
+}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
@@ -271,11 +277,6 @@ td:last-child {
 .table thead th:last-child {
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
-}
-
-.table i {
-  padding: 0;
-  margin-right: 10px;
 }
 
 tbody tr {
@@ -353,6 +354,24 @@ tfoot tr {
   letter-spacing: 10px;
   text-transform: uppercase;
   color: #38454f;
+  animation: rotation2 5s infinite reverse;
+}
+
+@keyframes rotation2 {
+  0% {
+    transform: skew(0deg);
+  }
+  50% {
+    transform: skew(5deg);
+    /* filter: drop-shadow(1px 1px 1px var(--green)); */
+  }
+  75% {
+    transform: skew(-5deg);
+    /* filter: drop-shadow(1px 1px 1px var(--red)); */
+  }
+  100% {
+    transform: skew(0deg);
+  }
 }
 
 .sectionTitle::first-letter {
@@ -456,7 +475,9 @@ input:focus {
   margin: 20px;
 }
 
-tbody .btn .bi {
-  margin: 0 auto !important;
-  font-size: 18px;
+.userIconWrapper {
+  background: #f5f6fa;
+  border-radius: 0 0 0 50%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }

@@ -140,7 +140,7 @@ const Sessions = () => {
           </tbody>
         </table>
       </div>
-      <div className="d-flex align-items-center justify-content-center mb-5">
+      <div className="d-flex align-items-center justify-content-end mb-5">
         <Pagination
           className="pt-5"
           postsPerPage={postsPerPage}

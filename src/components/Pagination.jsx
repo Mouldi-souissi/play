@@ -18,7 +18,7 @@ function Pagination({
     <ul className="d-flex flex-column justify-content-start align-items-center">
       <div className="d-flex justify-content-start align-items-center mb-2">
         <button
-          className="btn btn-white font-weight-bold me-2"
+          className="btn btn-sm font-weight-bold me-2"
           onClick={() => previousPage(pageNumbers)}
         >
           <i class="bi bi-chevron-left"></i>
@@ -29,7 +29,7 @@ function Pagination({
               onClick={() => paginate(number)}
               className={`${
                 currentPage === number ? "btn-primary" : "btn-outline-primary"
-              } btn font-weight-bold`}
+              } btn btn-sm rounded font-weight-bold`}
               style={{ width: "40px" }}
             >
               {number}
@@ -37,13 +37,15 @@ function Pagination({
           </li>
         ))}
         <button
-          className="btn btn-white font-weight-bold me-2"
+          className="btn btn-sm  font-weight-bold me-2"
           onClick={() => nextPage(pageNumbers)}
         >
           <i class="bi bi-chevron-right"></i>
         </button>
       </div>
-      <div>Total: {totalMoves}</div>
+      <div>
+        Total: <span className="green">{totalMoves}</span>
+      </div>
     </ul>
   );
 }

@@ -13,16 +13,19 @@ const Sidebar = () => {
 
   return (
     <div className={`sidebar ${isSidebarHidden ? "hidden" : ""}`}>
-      <div className="d-flex justify-content-center mt-3 mb-2">
+      <div className="d-flex justify-content-center align-items-end mb-2 userIconWrapper">
         <img
           src={userIcon}
           alt="profile_picture"
           className="img-fluid userIcon"
         />
+        {/* <div className="profile mb-4"> */}
+        <h6 className="text-center text-dark text-uppercase ms-3">
+          {username}
+        </h6>
+        {/* </div> */}
       </div>
-      <div className="profile mb-4">
-        <h5 className="text-center text-white text-uppercase">{username}</h5>
-      </div>
+
       <ul>
         {userType === "admin" &&
           adminRoutes.map((route, i) => (
