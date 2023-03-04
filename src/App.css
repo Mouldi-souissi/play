@@ -455,3 +455,8 @@ input:focus {
   max-width: 400px;
   margin: 20px;
 }
+
+tbody .btn .bi {
+  margin: 0 auto !important;
+  font-size: 18px;
+}

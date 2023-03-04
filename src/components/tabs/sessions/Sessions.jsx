@@ -118,13 +118,13 @@ const Sessions = () => {
                   <td>{formatCurrency(session.total)}</td>
                   <td>{session.user}</td>
                   <td>
-                    <button className="btn btn-transparent p-0">
-                      <i
-                        className="bi bi-search "
-                        data-bs-toggle="modal"
-                        data-bs-target="#sessionDetails"
-                        onClick={() => setSession(session)}
-                      ></i>
+                    <button
+                      className="btn btn-transparent btn-sm"
+                      data-bs-toggle="modal"
+                      data-bs-target="#sessionDetails"
+                      onClick={() => setSession(session)}
+                    >
+                      <i className="bi bi-search green"></i>
                     </button>
                     {/* <button className="btn btn-transparent p-0">
                       <i

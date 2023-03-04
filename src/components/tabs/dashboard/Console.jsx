@@ -203,10 +203,10 @@ const Console = ({ poste }) => {
                     <td>{row.totalGames}</td>
                     <td>
                       <button
-                        className="btn btn-transparent m-0"
+                        className="btn btn-transparent btn-sm"
                         onClick={() => deleteRow(row.id)}
                       >
-                        <i className="bi-trash3 red" />
+                        <i className="bi bi-trash3 red" />
                       </button>
                     </td>
                     <td>{formatCurrency(row.total)}</td>

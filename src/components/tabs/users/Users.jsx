@@ -55,21 +55,21 @@ const Users = () => {
                   <td>{user.email}</td>
                   <td>{user.type}</td>
                   <td>
-                    <button className="btn btn-transparent p-0">
-                      <i
-                        className="bi bi-gear "
-                        data-bs-toggle="modal"
-                        data-bs-target="#editUser"
-                        onClick={() => setUser(user)}
-                      ></i>
+                    <button
+                      className="btn btn btn-transparent btn-sm"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editUser"
+                      onClick={() => setUser(user)}
+                    >
+                      <i className="bi bi-gear "></i>
                     </button>
-                    <button className="btn btn-transparent p-0">
-                      <i
-                        className="bi bi-trash3 red"
-                        data-bs-toggle="modal"
-                        data-bs-target="#deleteUser"
-                        onClick={() => setDeleteData(user)}
-                      ></i>
+                    <button
+                      className="btn btn-transparent btn-sm"
+                      data-bs-toggle="modal"
+                      data-bs-target="#deleteUser"
+                      onClick={() => setDeleteData(user)}
+                    >
+                      <i className="bi bi-trash3 red"></i>
                     </button>
                   </td>
                 </tr>
