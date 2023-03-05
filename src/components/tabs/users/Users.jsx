@@ -20,11 +20,11 @@ const Users = () => {
       <div className="d-flex align-items-baseline justify-content-center mb-5">
         <h4 className="me-3  sectionTitle">Utilisateurs</h4>
         <button
-          className="btn btn-outline-primary py-0 px-1"
+          className="btn btn-outline-primary btn-sm"
           data-bs-toggle="modal"
           data-bs-target="#addUser"
         >
-          <i className="bi bi-plus h3"></i>
+          <i className="bi bi-plus h4"></i>
         </button>
       </div>
       <div className="loader_wrapper">

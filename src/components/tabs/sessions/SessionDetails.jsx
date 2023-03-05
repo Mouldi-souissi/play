@@ -12,7 +12,7 @@ const SessionDetails = ({ session }) => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5">Détails</h1>
+            <h1 className="modal-title fs-5 green">Détails</h1>
             <button
               type="button"
               className="btn-close"

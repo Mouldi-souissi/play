@@ -67,19 +67,23 @@ const Sessions = () => {
   return (
     <div className="container tabContent">
       <h4 className="sectionTitle text-center mb-5">historique</h4>
-      <div className="filters mb-2 d-flex align-items-center justify-content-between">
-        <CustomSelect
-          options={optionsStation}
-          getSelected={getValues}
-          name="station"
-          defaultSelectedOption={filters.station}
-        />
-        <CustomSelect
-          options={optionsPeriod}
-          getSelected={getValues}
-          name="period"
-          defaultSelectedOption={filters.period}
-        />
+      <div className="filters mb-2 d-flex align-items-center justify-content-between flex-wrap">
+        <div className="me-5 mb-3">
+          <CustomSelect
+            options={optionsStation}
+            getSelected={getValues}
+            name="station"
+            defaultSelectedOption={filters.station}
+          />
+        </div>
+        <div className="mb-3">
+          <CustomSelect
+            options={optionsPeriod}
+            getSelected={getValues}
+            name="period"
+            defaultSelectedOption={filters.period}
+          />
+        </div>
       </div>
       <div className="table-responsive">
         <table className="table">

@@ -87,8 +87,8 @@ const Console = ({ poste }) => {
       <div className="modal-dialog modal-fullscreen">
         <div className="modal-content">
           <div className="modal-header shadow-sm">
-            <img src={consoleLogo} width="50px" />
-            <h1 className="modal-title fs-5">{poste.name}</h1>
+            <img src={consoleLogo} width="50px" className="consoleImgSm me-3" />
+            <h1 className="modal-title fs-5 fw-bold black">{poste.name}</h1>
 
             <button
               type="button"
@@ -129,48 +129,35 @@ const Console = ({ poste }) => {
               </button>
             )}
 
-            <div className="h6 my-3 text-center">Ajouter les matchs joués</div>
+            <div className="fw-bolder my-3 text-center">
+              Ajouter les matchs joués
+            </div>
             <form className="card p-4 mb-4 shadow-sm" onSubmit={addRow}>
               <div className="d-flex flex-wrap align-items-end">
                 <div className="form-group me-4">
-                  <label className="my-2">Veuillez choisir un jeux</label>
+                  <label className="my-2 fw-semibold">
+                    Veuillez choisir un jeux
+                  </label>
                   <CustomSelect
                     options={gameOptions}
                     getSelected={getValues}
                     name="game"
                     defaultSelectedOption={data.game}
                   />
-                  {/* <select
-                    className="form-select"
-                    onChange={handleChange}
-                    name="game"
-                  >
-                    {games.map((game) => (
-                      <option value={game.name} key={game.id}>
-                        {game.name}
-                      </option>
-                    ))}
-                  </select> */}
                 </div>
                 <div className="form-group me-4">
-                  <label className="my-2">Veuillez choisir la durée</label>
+                  <label className="my-2 fw-semibold">
+                    Veuillez choisir la durée
+                  </label>
                   <CustomSelect
                     options={["10 Min", "15 Min"]}
                     getSelected={getValues}
                     name="duration"
                     defaultSelectedOption={data.duration}
                   />
-                  {/* <select
-                    className="form-select"
-                    onChange={handleChange}
-                    name="duration"
-                  >
-                    <option value="10">10 Min</option>
-                    <option value="15">15 Min</option>
-                  </select> */}
                 </div>
                 <div className="form-group">
-                  <label className="my-2">Total des matchs</label>
+                  <label className="my-2 fw-semibold">Total des matchs</label>
                   <input
                     type="text"
                     className="form-control"

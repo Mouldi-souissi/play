@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import useGlobalStore from "../../../strore";
+import CustomSelect from "../../CustomSelect";
 
 const AddUser = () => {
   const [data, setData] = useState({ type: "utilisateur" });
@@ -21,7 +22,7 @@ const AddUser = () => {
         <form onSubmit={handleSubmit}>
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5">
+              <h1 className="modal-title fs-5 green">
                 Ajouter un nouveau utilisateur
               </h1>
               <button
@@ -31,8 +32,9 @@ const AddUser = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
-              <div className="form-floating mb-3">
+            <div className="modal-body p-4">
+              <div className="form-group mb-3">
+                <label className="mb-2 fw-semibold">Nom</label>
                 <input
                   type="text"
                   className="form-control"
@@ -42,9 +44,9 @@ const AddUser = () => {
                   required
                   autoComplete="off"
                 />
-                <label>Nom</label>
               </div>
-              <div className="form-floating mb-3">
+              <div className="form-group mb-3">
+                <label className="mb-2 fw-semibold">Email</label>
                 <input
                   type="email"
                   className="form-control"
@@ -53,9 +55,9 @@ const AddUser = () => {
                   onChange={handleInput}
                   required
                 />
-                <label>Email</label>
               </div>
-              <div className="form-floating mb-3">
+              <div className="form-group mb-3">
+                <label className="mb-2 fw-semibold">Mot de passe</label>
                 <input
                   type="password"
                   className="form-control"
@@ -65,10 +67,9 @@ const AddUser = () => {
                   required
                   autoComplete="off"
                 />
-                <label>Mot de passe</label>
               </div>
 
-              <div className="form-floating mb-3">
+              {/* <div className="form-floating mb-3">
                 <select
                   className="form-select"
                   name="type"
@@ -79,6 +80,17 @@ const AddUser = () => {
                   <option value="admin">Admin</option>
                 </select>
                 <label>Type</label>
+              </div> */}
+              <div className="mb-3">
+                <label className="mb-2 fw-semibold">Type</label>
+                <CustomSelect
+                  options={["admin", "utilisateur"]}
+                  getSelected={(name, value) => {
+                    setData({ ...data, type: value });
+                  }}
+                  name="type"
+                  defaultSelectedOption={data.type}
+                />
               </div>
             </div>
             <div className="modal-footer">

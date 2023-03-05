@@ -2,7 +2,7 @@
   --red: tomato;
   --purple: #00b7ff;
   --green: #02c7ba;
-  --yellow: rgba(255, 238, 0, 0.438);
+  --black: #38454f;
 }
 
 .red {
@@ -14,8 +14,8 @@
 .green {
   color: var(--green);
 }
-.yellow {
-  color: var(--yellow);
+.black {
+  color: var(--black);
 }
 
 * {
@@ -217,6 +217,13 @@ i::before {
   animation: rotation 2s infinite linear;
 }
 
+.consoleImgSm {
+  width: 50px;
+  height: auto;
+  filter: drop-shadow(4px 1px 1px rgba(128, 128, 128, 0.479));
+  animation: rotation 2s infinite linear;
+}
+
 tbody .btn .bi {
   margin: 0 auto !important;
   font-size: 18px;
@@ -243,7 +250,8 @@ tbody .btn .bi {
   border: 10px solid tomato !important;
 }
 
-.modal-footer {
+.modal-footer,
+.modal-header {
   border-color: transparent !important;
 }
 
@@ -327,6 +335,7 @@ tfoot tr {
 .btn-outline-primary {
   border-color: var(--green) !important ;
   color: var(--green);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .btn-outline-primary:active {
@@ -400,7 +409,8 @@ tfoot tr {
   user-select: none;
 }
 
-#editUser .selectMenu {
+#editUser .selectMenu,
+#addUser .selectMenu {
   width: 100%;
 }
 
@@ -462,7 +472,6 @@ tfoot tr {
 }
 
 input {
-  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
   height: 40px !important;
   border-radius: 10px !important;
   outline: 1px solid rgba(128, 128, 128, 0.253);
