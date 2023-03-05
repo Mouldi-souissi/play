@@ -68,19 +68,6 @@ const AddUser = () => {
                   autoComplete="off"
                 />
               </div>
-
-              {/* <div className="form-floating mb-3">
-                <select
-                  className="form-select"
-                  name="type"
-                  onChange={handleInput}
-                  value={data.type}
-                >
-                  <option value="utilisateur">Utilisateur</option>
-                  <option value="admin">Admin</option>
-                </select>
-                <label>Type</label>
-              </div> */}
               <div className="mb-3">
                 <label className="mb-2 fw-semibold">Type</label>
                 <CustomSelect

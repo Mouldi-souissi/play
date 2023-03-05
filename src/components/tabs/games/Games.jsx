@@ -1,12 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { formatCurrency } from "../../../functions/formatCurrency";
 import useGlobalStore from "../../../strore";
 import AddGame from "./AddGame";
+import DeleteGame from "./DeleteGame";
+import EditGame from "./EditGame";
 
 const Games = () => {
   const games = useGlobalStore((state) => state.games);
   const isLoading = useGlobalStore((state) => state.isLoading);
   const getGames = useGlobalStore((state) => state.getGames);
+  const [game, setGame] = useState({ name: "" });
 
   useEffect(() => {
     getGames();
@@ -16,11 +19,11 @@ const Games = () => {
       <div className="d-flex align-items-baseline justify-content-center mb-5">
         <h4 className="me-3  sectionTitle">Jeux</h4>
         <button
-          className="btn btn-outline-primary py-0 px-1"
+          className="btn btn-outline-primary btn-sm"
           data-bs-toggle="modal"
           data-bs-target="#addGame"
         >
-          <i className="bi bi-plus h3"></i>
+          <i className="bi bi-plus h4"></i>
         </button>
       </div>
       <div className="loader_wrapper">
@@ -31,7 +34,7 @@ const Games = () => {
         )}
       </div>
       <div className="container">
-        <div className="row">
+        <div className="row justify-content-center">
           {games
             .sort((a, b) => {
               if (a.name < b.name) return 1;
@@ -39,42 +42,38 @@ const Games = () => {
               return 0;
             })
             .map((game) => (
-              <div className="card customShadow game">
-                <div className="row g-0">
-                  <div className="col-md-4">
-                    <img
-                      src={game.logo}
-                      className="img-fluid rounded-start"
-                      alt="..."
-                    />
+              <div className="game">
+                <div className="d-flex justify-content-between align-items-center game-header p-3">
+                  <h5 className="mb-0">{game.name}</h5>
+                  <div className="d-flex">
+                    <button
+                      className="btn btn-transparent btn-sm"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editGame"
+                      onClick={() => setGame(game)}
+                    >
+                      <i className="bi bi-gear"></i>
+                    </button>
+                    <button
+                      className="btn btn-transparent btn-sm"
+                      data-bs-toggle="modal"
+                      data-bs-target="#deleteGame"
+                      onClick={() => setGame(game)}
+                    >
+                      <i className="bi bi-trash3"></i>
+                    </button>
                   </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <div className="d-flex justify-content-between align-items-center mb-5">
-                        <h5 className="card-title mb-0">{game.name}</h5>
-                        <button className="btn btn-transparent p-0">
-                          <i
-                            className="bi bi-gear "
-                            data-bs-toggle="modal"
-                            data-bs-target="#editUser"
-                            // onClick={() => setUser(game)}
-                          ></i>
-                        </button>
+                </div>
+                <div className="game-body p-3">
+                  <div className="fw-bolder mb-2 tarif">Tarif</div>
+                  {game.prices.map((c) => (
+                    <div className="d-flex justify-content-between">
+                      <div className="me-4">{c.duration} :</div>
+                      <div className="fw-semibold">
+                        {formatCurrency(c.price)}
                       </div>
-                      {/* <p className="card-text">
-                      This is a wider card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
-                    </p> */}
-                      <div className="fw-bold mb-2">Tarif</div>
-                      {game.prices.map((c) => (
-                        <div className="d-flex">
-                          <div className="me-4">{c.duration} :</div>
-                          <div className="green">{formatCurrency(c.price)}</div>
-                        </div>
-                      ))}
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             ))}
@@ -82,8 +81,8 @@ const Games = () => {
       </div>
 
       <AddGame />
-      {/* <EditUser game={game} /> */}
-      {/* <DeleteUser game={deleteData} /> */}
+      <EditGame game={game} />
+      <DeleteGame game={game} />
     </div>
   );
 };

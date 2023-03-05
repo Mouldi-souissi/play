@@ -64,10 +64,10 @@ const useGlobalStore = create((set, get) => ({
       });
   },
 
-  editGame: (id) => {
+  editGame: (id, game) => {
     set({ isLoading: true });
     axios
-      .put(`${API_URL}/game/${id}`, {
+      .put(`${API_URL}/game/${id}`, game, {
         headers: { token: localStorage.getItem("token") },
       })
       .then((res) => {

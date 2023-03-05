@@ -1,12 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { generateUUID } from "../../../functions/generateUUID";
 import useGlobalStore from "../../../strore";
 import CustomSelect from "../../CustomSelect";
 
-const AddGame = () => {
+const EditGame = ({ game }) => {
   const [data, setData] = useState({ name: "", prices: [] });
   const [tariff, setTariff] = useState({ duration: "10 Min", price: 0 });
-  const addGame = useGlobalStore((state) => state.addGame);
+  const editGame = useGlobalStore((state) => state.editGame);
   const refClose = useRef();
 
   const handleInput = (e) => {
@@ -15,7 +15,7 @@ const AddGame = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addGame(data);
+    editGame(game._id, data);
     refClose.current.click();
   };
 
@@ -41,12 +41,19 @@ const AddGame = () => {
   const handlePrice = (e) => {
     setTariff({ ...tariff, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    setData({ name: game.name, prices: game.prices });
+  }, [game]);
+
   return (
-    <div className="modal fade" id="addGame" tabIndex="-1" aria-hidden="true">
+    <div className="modal fade" id="editGame" tabIndex="-1" aria-hidden="true">
       <div className="modal-dialog modal-xl">
         <div className="modal-content">
           <div className="modal-header">
-            <h1 className="modal-title fs-5 green">Ajouter un nouveau jeu</h1>
+            <h1 className="modal-title fs-5 green">
+              Modifier le jeu {game.name}
+            </h1>
             <button
               type="button"
               className="btn-close"
@@ -65,6 +72,7 @@ const AddGame = () => {
                 onChange={handleInput}
                 required
                 autoComplete="off"
+                value={data.name}
               />
             </div>
             <div className="fw-semibold mb-2">Tarif</div>
@@ -150,7 +158,7 @@ const AddGame = () => {
               onClick={handleSubmit}
               disabled={!data.name || !data.prices.length}
             >
-              Ajouter
+              Sauvegarder
             </button>
           </div>
         </div>
@@ -159,4 +167,4 @@ const AddGame = () => {
   );
 };
 
-export default AddGame;
+export default EditGame;
