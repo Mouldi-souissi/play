@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import userLogo from "../assets/user.png";
+import userLogo from "../assets/console.png";
 import useGlobalStore from "../strore";
 
 const Login = () => {
@@ -23,7 +23,7 @@ const Login = () => {
           <img
             src={userLogo}
             alt="profile_picture"
-            className="img-fluid mb-4 userLogo"
+            className="img-fluid mb-4 consoleImg"
           />
         </div>
         <form onSubmit={handleLogin}>
