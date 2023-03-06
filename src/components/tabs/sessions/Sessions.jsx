@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { formatCurrency } from "../../../functions/formatCurrency";
-import useGlobalStore from "../../../strore";
+import useGlobalStore from "../../../store";
 import CustomSelect from "../../CustomSelect";
 import Pagination from "../../Pagination";
 import SessionDetails from "./SessionDetails";

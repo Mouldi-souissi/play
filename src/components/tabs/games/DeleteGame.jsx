@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import useGlobalStore from "../../../strore";
+import useGlobalStore from "../../../store";
 
 const DeleteGame = ({ game }) => {
   const deleteGame = useGlobalStore((state) => state.deleteGame);

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
-import Checkout from "../components/tabs/checkout/Checkout";
+import Account from "../components/tabs/account/Account";
 import Dashboard from "../components/tabs/dashboard/Dashboard";
 import Games from "../components/tabs/games/Games";
 import Sessions from "../components/tabs/sessions/Sessions";
 import Users from "../components/tabs/users/Users";
-import useGlobalStore from "../strore";
+import useGlobalStore from "../store";
 
 const MainPage = () => {
   const toggleSideBar = useGlobalStore((state) => state.toggleSideBar);
@@ -18,8 +18,8 @@ const MainPage = () => {
     if (activeTab === "dashboard") {
       return <Dashboard />;
     }
-    if (activeTab === "checkout") {
-      return <Checkout />;
+    if (activeTab === "account") {
+      return <Account />;
     }
     if (activeTab === "users") {
       return <Users />;

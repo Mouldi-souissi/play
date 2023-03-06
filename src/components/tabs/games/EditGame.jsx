@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { generateUUID } from "../../../functions/generateUUID";
-import useGlobalStore from "../../../strore";
+import useGlobalStore from "../../../store";
 import CustomSelect from "../../CustomSelect";
 
 const EditGame = ({ game }) => {

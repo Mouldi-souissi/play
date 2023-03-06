@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useGlobalStore from "../../../strore";
+import useGlobalStore from "../../../store";
 import EditUser from "./EditUser";
 import AddUser from "./AddUser";
 import DeleteUser from "./DeleteUser";

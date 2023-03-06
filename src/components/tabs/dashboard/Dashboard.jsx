@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import consoleLogo from "../../../assets/console.png";
-import useGlobalStore from "../../../strore";
+import useGlobalStore from "../../../store";
 import Console from "./Console";
 
 const Dashboard = () => {

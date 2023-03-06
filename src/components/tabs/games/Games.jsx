@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { formatCurrency } from "../../../functions/formatCurrency";
-import useGlobalStore from "../../../strore";
+import useGlobalStore from "../../../store";
 import AddGame from "./AddGame";
 import DeleteGame from "./DeleteGame";
 import EditGame from "./EditGame";

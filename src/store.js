@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import games from "./db/games.json";
 import axios from "axios";
 import decode from "jwt-decode";
 
@@ -16,6 +15,7 @@ const useGlobalStore = create((set, get) => ({
   isLoading: false,
   users: [],
   sessions: [],
+  account: {},
 
   getGames: () => {
     set({ isLoading: true });
@@ -237,7 +237,7 @@ const useGlobalStore = create((set, get) => ({
     },
     { link: "users", icon: "bi bi-people-fill", text: "Utilisateurs" },
     {
-      link: "checkout",
+      link: "account",
       icon: "bi bi-coin",
       text: "Caisse",
     },
@@ -253,21 +253,21 @@ const useGlobalStore = create((set, get) => ({
       icon: "bi bi-controller",
       text: "Postes",
     },
+    {
+      link: "history",
+      icon: "bi bi-clock-history",
+      text: "Historique",
+    },
     { link: "users", icon: "bi bi-people-fill", text: "Utilisateurs" },
     {
-      link: "checkout",
+      link: "account",
       icon: "bi bi-coin",
       text: "Caisse",
     },
     {
-      link: "history",
-      icon: "bi bi-clock-history",
-      text: "historique",
-    },
-    {
-      link: "parametres",
-      icon: "bi bi-gear",
-      text: "Parametres",
+      link: "games",
+      icon: "bi bi-disc",
+      text: "Jeux",
     },
   ],
 

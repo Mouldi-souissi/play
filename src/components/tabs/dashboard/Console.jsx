@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import consoleLogo from "../../../assets/console.png";
-import useGlobalStore from "../../../strore";
+import useGlobalStore from "../../../store";
 import { generateUUID } from "../../../functions/generateUUID";
 import { formatCurrency } from "../../../functions/formatCurrency";
 import CustomSelect from "../../CustomSelect";

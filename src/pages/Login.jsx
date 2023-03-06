@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import userLogo from "../assets/console.png";
-import useGlobalStore from "../strore";
+import useGlobalStore from "../store";
 
 const Login = () => {
   const [formData, setData] = useState({ email: "", password: "" });

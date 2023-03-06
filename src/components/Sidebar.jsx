@@ -1,6 +1,6 @@
 import React from "react";
 import userIcon from "../assets/user.png";
-import useGlobalStore from "../strore";
+import useGlobalStore from "../store";
 
 const Sidebar = () => {
   const isSidebarHidden = useGlobalStore((state) => state.isSidebarHidden);
