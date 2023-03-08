@@ -14,23 +14,6 @@ const MainPage = () => {
   const logout = useGlobalStore((state) => state.logout);
   const checkAuth = useGlobalStore((state) => state.checkAuth);
 
-  const handleTabs = () => {
-    if (activeTab === "dashboard") {
-      return <Dashboard />;
-    }
-    if (activeTab === "account") {
-      return <Account />;
-    }
-    if (activeTab === "users") {
-      return <Users />;
-    }
-    if (activeTab === "history") {
-      return <Sessions />;
-    }
-    if (activeTab === "games") {
-      return <Games />;
-    }
-  };
   const handleLogout = () => {
     logout();
   };
@@ -52,10 +35,28 @@ const MainPage = () => {
             </button>
           </div>
         </div>
-        {handleTabs()}
+        <Tabs activeTab={activeTab} />
       </div>
     </div>
   );
+};
+
+const Tabs = ({ activeTab }) => {
+  if (activeTab === "dashboard") {
+    return <Dashboard />;
+  }
+  if (activeTab === "account") {
+    return <Account />;
+  }
+  if (activeTab === "users") {
+    return <Users />;
+  }
+  if (activeTab === "history") {
+    return <Sessions />;
+  }
+  if (activeTab === "games") {
+    return <Games />;
+  }
 };
 
 export default MainPage;
