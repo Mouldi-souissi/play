@@ -17,6 +17,52 @@ const useGlobalStore = create((set, get) => ({
   sessions: [],
   account: {},
 
+  // ********* account
+  account: {},
+  getAccount: () => {
+    set({ isLoading: true });
+    axios
+      .get(`${API_URL}/account/fond`, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set({ account: res.data });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+  addAccount: (account) => {
+    set({ isLoading: true });
+    axios
+      .post(`${API_URL}/account`, account, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set({ account: res.data });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  editAccount: (id, account) => {
+    set({ isLoading: true });
+    axios
+      .put(`${API_URL}/account/${id}`, account, {
+        headers: { token: localStorage.getItem("token") },
+      })
+      .then((res) => {
+        set({ account: res.data });
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
   getGames: () => {
     set({ isLoading: true });
     axios

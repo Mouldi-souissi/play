@@ -1,38 +1,48 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useGlobalStore from "../../../store";
 
 const cards = [
-  { id: 1, title: "Fond", value: "1000", icon: "bi bi-safe" },
-  { id: 2, title: "Total matchs", value: "100", icon: "bi bi-calculator" },
   {
     id: 3,
     title: "Meilleur vendeur",
     value: "Mouldi",
     icon: "bi bi-star-fill",
   },
-  {
-    id: 4,
-    title: "Chiffre d'affaires",
-    value: "3000",
-    icon: "bi bi-graph-up-arrow",
-  },
 ];
 
 const Account = () => {
   const account = useGlobalStore((state) => state.account);
+  const getAccount = useGlobalStore((state) => state.getAccount);
+
+  useEffect(() => {
+    getAccount();
+  }, []);
+
   return (
     <div className="container">
       <h4 className="mb-5 text-center sectionTitle">Caisse</h4>
       <div className="cards mt-5">
-        {cards.map((card) => (
-          <div key={card.id} className="account_card">
-            <div className={`${card.icon} card_icon`}></div>
-            <div className="card_right">
-              <div className="card_title">{card.title}</div>
-              <div className="card_value">{card.value}</div>
-            </div>
+        <div className="account_card">
+          <i className="bi bi-safe card_icon" />
+          <div className="card_right">
+            <div className="card_title">Fond</div>
+            <div className="card_value">{account.deposit}</div>
           </div>
-        ))}
+        </div>
+        <div className="account_card">
+          <i className="bi bi-calculator card_icon" />
+          <div className="card_right">
+            <div className="card_title">Total matchs</div>
+            <div className="card_value">{account.totalGames}</div>
+          </div>
+        </div>
+        <div className="account_card">
+          <i className="bi bi-graph-up-arrow card_icon" />
+          <div className="card_right">
+            <div className="card_title">Chiffre d'affaires</div>
+            <div className="card_value">{account.gain}</div>
+          </div>
+        </div>
       </div>
     </div>
   );
