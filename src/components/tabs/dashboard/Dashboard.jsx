@@ -32,7 +32,6 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <h4 className="mb-5 text-center sectionTitle">Postes</h4>
-      <button onClick={test}>test</button>
       <div className="postes">
         {consoles
           .sort((a, b) => {
