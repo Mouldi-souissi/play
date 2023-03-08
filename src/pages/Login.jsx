@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import userLogo from "../assets/console.png";
+import userIcon from "../assets/user.png";
 import useGlobalStore from "../store";
 
 const Login = () => {
@@ -19,15 +19,15 @@ const Login = () => {
   return (
     <div className="login d-flex align-items-center justify-content-center">
       <div className="card shadow p-5 col-lg-4">
-        <div className="d-flex align-items-center justify-content-center">
+        <div className="d-flex justify-content-center align-items-end mb-4">
           <img
-            src={userLogo}
+            src={userIcon}
             alt="profile_picture"
-            className="img-fluid mb-4 consoleImg"
+            className="img-fluid userIcon"
           />
         </div>
         <form onSubmit={handleLogin}>
-          <div className="form-floating  mb-3">
+          <div className="form-floating mb-3">
             <input
               type="email"
               className="form-control"

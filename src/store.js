@@ -15,7 +15,7 @@ const useGlobalStore = create((set, get) => ({
   isLoading: false,
   users: [],
   sessions: [],
-  account: {},
+  account: { deposit: 0, totalGames: 0, gain: 0 },
 
   // ********* account
   account: {},

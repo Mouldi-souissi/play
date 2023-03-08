@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { formatCurrency } from "../../../functions/formatCurrency";
 import useGlobalStore from "../../../store";
 
 const cards = [
@@ -26,7 +27,7 @@ const Account = () => {
           <i className="bi bi-safe card_icon" />
           <div className="card_right">
             <div className="card_title">Fond</div>
-            <div className="card_value">{account.deposit}</div>
+            <div className="card_value">{formatCurrency(account.deposit)}</div>
           </div>
         </div>
         <div className="account_card">
@@ -40,7 +41,7 @@ const Account = () => {
           <i className="bi bi-graph-up-arrow card_icon" />
           <div className="card_right">
             <div className="card_title">Chiffre d'affaires</div>
-            <div className="card_value">{account.gain}</div>
+            <div className="card_value">{formatCurrency(account.gain)}</div>
           </div>
         </div>
       </div>

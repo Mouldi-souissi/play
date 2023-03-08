@@ -21,20 +21,20 @@ const SessionDetails = ({ session }) => {
             ></button>
           </div>
           <div className="modal-body">
-            <ol className="list-group ">
+            <div>
               {session.games.map((game) => (
-                <li
+                <div
                   key={game.id}
-                  className="list-group-item d-flex justify-content-between"
+                  className="session_details d-flex justify-content-between"
                 >
                   <span>
                     <span> {game.game}</span>
                     <span> x {game.totalGames}</span>
                   </span>
                   <span> {formatCurrency(game.total)}</span>
-                </li>
+                </div>
               ))}
-            </ol>
+            </div>
           </div>
           <div className="modal-footer">
             <button
