@@ -34,8 +34,9 @@ const CustomSelect = ({
   }, [options, getSelected, name, defaultSelectedOption]);
 
   return (
-    <div className="selectMenu" ref={componentRef}>
+    <div className="selectMenu" ref={componentRef} tabIndex="0">
       <div
+        tabIndex="0"
         className={`d-flex justify-content-between selectHeader p-2 ${
           isSelecting && "active"
         }`}

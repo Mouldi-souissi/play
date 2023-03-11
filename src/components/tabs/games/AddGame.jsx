@@ -122,11 +122,9 @@ const AddGame = () => {
                         <button
                           className="btn btn-transparent btn-sm"
                           type="button"
+                          onClick={() => deleteTarif(p.id)}
                         >
-                          <i
-                            className="bi bi-trash3 red"
-                            onClick={() => deleteTarif(p.id)}
-                          ></i>
+                          <i className="bi bi-trash3 red"></i>
                         </button>
                       </td>
                     </tr>

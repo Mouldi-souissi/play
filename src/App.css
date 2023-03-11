@@ -274,7 +274,8 @@ td:last-child {
 
 .table thead {
   background: tomato !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1); */
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
 }
 .table thead th {
   vertical-align: middle !important;
@@ -294,13 +295,15 @@ tbody tr {
   /* filter: drop-shadow(1px 0px 1px rgba(128, 128, 128, 0.795)); */
   color: #38454f;
   /* outline: 2px solid rgba(128, 128, 128, 0.377); */
-  outline-offset: -5px;
+  outline-offset: -1px;
   border-radius: 10px;
   /* box-shadow: inset 1px 1px 2px rgba(128, 128, 128, 0.527),
     1px 1px 2px rgba(128, 128, 128, 0.527); */
   height: 50px !important;
   vertical-align: middle !important;
-  box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.1); */
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+  outline: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 thead {
@@ -410,6 +413,11 @@ tfoot tr {
   user-select: none;
 }
 
+.selectMenu:focus {
+  border-radius: 10px !important;
+  outline: 1px solid #02c7ba98;
+}
+
 #editUser .selectMenu,
 #addUser .selectMenu {
   width: 100%;
@@ -461,16 +469,11 @@ tfoot tr {
 
 .customShadow {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
 }
 
 .btn-close {
   font-size: 10px;
 }
-
-/* #addGame .modal-content {
-  min-height: 100vh;
-} */
 
 input {
   height: 40px !important;
@@ -480,7 +483,9 @@ input {
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 input:focus {
-  border-color: var(--green) !important;
+  border-radius: 10px !important;
+  outline: 1px solid #02c7ba98 !important;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1) !important;
 }
 
 .form-floating > label {
