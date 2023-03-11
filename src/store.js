@@ -7,7 +7,6 @@ const API_URL = "http://localhost:5000/api";
 const useGlobalStore = create((set, get) => ({
   isSidebarHidden: false,
   activeTab: "dashboard",
-  loggedUser: "",
   username: "",
   userType: "",
   consoles: [],
@@ -359,13 +358,14 @@ const useGlobalStore = create((set, get) => ({
   },
   logout: () => {
     window.localStorage.removeItem("token");
+    window.localStorage.removeItem("activeTab");
     window.location.replace("/login");
   },
   checkAuth: () => {
     const token =
       localStorage.getItem("token") && localStorage.getItem("token");
-    const decodedToken = decode(token);
     if (token) {
+      const decodedToken = decode(token);
       set({
         username: decodedToken.name,
         userType: decodedToken.type,

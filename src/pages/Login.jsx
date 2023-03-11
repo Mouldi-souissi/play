@@ -12,8 +12,8 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("submits");
     login(formData.email, formData.password);
+    setData({ email: "", password: "" });
   };
 
   return (

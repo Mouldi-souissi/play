@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import MainPages from "./pages/MainPages";
 import { PrivateRoute } from "./components/PrivateRoute";
+import { PublicRoute } from "./components/publicRoute";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -13,7 +14,7 @@ function App() {
       <Router>
         <Switch>
           <PrivateRoute exact path="/" component={MainPages} />
-          <Route exact path="/login" component={Login} />
+          <PublicRoute exact path="/login" component={Login} />
         </Switch>
       </Router>
     </div>
