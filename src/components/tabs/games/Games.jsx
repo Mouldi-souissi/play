@@ -16,14 +16,14 @@ const Games = () => {
   }, []);
   return (
     <div className="container">
-      <div className="d-flex align-items-baseline justify-content-center mb-5">
-        <h4 className="me-3  sectionTitle">Jeux</h4>
+      <div className="d-flex align-items-center justify-content-center mb-5 mt-3">
+        <h4 className="me-3 my-0 sectionTitle">Jeux</h4>
         <button
-          className="btn btn-outline-primary btn-sm"
+          className="btn btn-outline-primary"
           data-bs-toggle="modal"
           data-bs-target="#addGame"
         >
-          <i className="bi bi-plus h4"></i>
+          Ajouter
         </button>
       </div>
       <div className="loader_wrapper">

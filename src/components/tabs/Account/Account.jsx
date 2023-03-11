@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { formatCurrency } from "../../../functions/formatCurrency";
 import useGlobalStore from "../../../store";
+import EditAccount from "./editAccount";
 
 const cards = [
   {
@@ -21,7 +22,17 @@ const Account = () => {
 
   return (
     <div className="container">
-      <h4 className="mb-5 text-center sectionTitle">Caisse</h4>
+      <div className="d-flex align-items-center justify-content-center mb-5 mt-3">
+        <h4 className="me-3 my-0 sectionTitle">Caisse</h4>
+        <button
+          className="btn btn-outline-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#editAccount"
+        >
+          Editer
+        </button>
+      </div>
+
       <div className="cards mt-5">
         <div className="account_card">
           <i className="bi bi-safe card_icon" />
@@ -45,6 +56,7 @@ const Account = () => {
           </div>
         </div>
       </div>
+      <EditAccount account={account} />
     </div>
   );
 };

@@ -139,7 +139,7 @@ ul {
   color: var(--red);
 }
 
-i::before {
+.sidebar i::before {
   filter: drop-shadow(1px 1px 0px rgba(128, 128, 128, 0.144)) !important;
   animation: rotation2 2s infinite linear;
 }
