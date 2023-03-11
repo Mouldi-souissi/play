@@ -19,6 +19,7 @@ const Console = ({ poste }) => {
   const refClose = useRef();
 
   const [data, setData] = useState({ game: "FIFA", duration: "10 Min" });
+  const [msg, setMsg] = useState("");
 
   const total = poste.games.reduce((acc, cur) => (acc += cur.total), 0);
 
@@ -32,11 +33,19 @@ const Console = ({ poste }) => {
 
   const addRow = (e) => {
     e.preventDefault();
-    addGameToSession(poste, {
-      ...data,
-      id: generateUUID(),
-      total: calculateTotalRow(data),
-    });
+    const total = calculateTotalRow(data);
+    if (total) {
+      addGameToSession(poste, {
+        ...data,
+        id: generateUUID(),
+        total,
+      });
+    } else {
+      setMsg("Pas de tarif");
+      setTimeout(() => {
+        setMsg("");
+      }, 2000);
+    }
   };
 
   const deleteRow = (id) => {
@@ -45,10 +54,13 @@ const Console = ({ poste }) => {
 
   const calculateTotalRow = (row) => {
     const match = games.find((game) => game.name === row.game);
-    console.log(match);
-    const cost = match["prices"].find((c) => c.duration === row.duration);
 
-    return cost["price"] * Number(row.totalGames);
+    const cost = match["prices"].find((c) => c.duration === row.duration);
+    if (match && cost) {
+      return cost["price"] * Number(row.totalGames);
+    } else {
+      return 0;
+    }
   };
 
   const activateSession = (id) => {
@@ -132,6 +144,7 @@ const Console = ({ poste }) => {
             <div className="fw-bolder my-3 text-center">
               Ajouter les matchs joués
             </div>
+
             <form className="card p-4 mb-4 shadow-sm" onSubmit={addRow}>
               <div className="d-flex flex-wrap align-items-end">
                 <div className="form-group me-4">
@@ -150,7 +163,7 @@ const Console = ({ poste }) => {
                     Veuillez choisir la durée
                   </label>
                   <CustomSelect
-                    options={["10 Min", "15 Min"]}
+                    options={["10 Min", "15 Min", "1 h"]}
                     getSelected={getValues}
                     name="duration"
                     defaultSelectedOption={data.duration}
@@ -175,6 +188,7 @@ const Console = ({ poste }) => {
                   Ajouter <i className="fa fa-shopping-cart ms-2" />
                 </button>
               </div>
+              {msg && <div className="text-center red">{msg}</div>}
             </form>
 
             <table className="table">
