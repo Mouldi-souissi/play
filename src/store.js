@@ -321,6 +321,7 @@ const useGlobalStore = create((set, get) => ({
     set((state) => ({ isSidebarHidden: !state.isSidebarHidden }));
   },
   switchTab: (tab) => {
+    localStorage.setItem("activeTab", tab);
     set({ activeTab: tab });
   },
 
@@ -345,6 +346,7 @@ const useGlobalStore = create((set, get) => ({
       .post(`${API_URL}/user/login`, { email, password })
       .then((res) => {
         localStorage.setItem("token", res.data);
+        localStorage.setItem("activeTab", "dashboard");
         const decodedToken = decode(res.data);
         set({
           username: decodedToken.name,
@@ -367,7 +369,6 @@ const useGlobalStore = create((set, get) => ({
       set({
         username: decodedToken.name,
         userType: decodedToken.type,
-        activeTab: "dashboard",
       });
     }
   },

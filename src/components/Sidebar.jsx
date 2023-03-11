@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import userIcon from "../assets/user.png";
 import useGlobalStore from "../store";
 
@@ -10,6 +10,10 @@ const Sidebar = () => {
   const userType = useGlobalStore((state) => state.userType);
   const adminRoutes = useGlobalStore((state) => state.adminRoutes);
   const userRoutes = useGlobalStore((state) => state.userRoutes);
+
+  useEffect(() => {
+    switchTab(localStorage.getItem("activeTab"));
+  }, []);
 
   return (
     <div className={`sidebar ${isSidebarHidden ? "hidden" : ""}`}>

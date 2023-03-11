@@ -42,7 +42,7 @@ const Games = () => {
               return 0;
             })
             .map((game) => (
-              <div className="game">
+              <div className="game" key={game._id}>
                 <div className="d-flex justify-content-between align-items-center game-header p-3">
                   <h5 className="mb-0">{game.name}</h5>
                   <div className="d-flex">
