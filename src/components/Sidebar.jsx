@@ -15,6 +15,10 @@ const Sidebar = () => {
     switchTab(localStorage.getItem("activeTab"));
   }, []);
 
+  useEffect(() => {
+    console.log("render sidebar");
+  });
+
   return (
     <div className={`sidebar ${isSidebarHidden ? "hidden" : ""}`}>
       <div className="d-flex justify-content-center align-items-end mb-2 userIconWrapper">

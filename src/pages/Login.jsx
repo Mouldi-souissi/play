@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import userIcon from "../assets/user.png";
 import useGlobalStore from "../store";
 
 const Login = () => {
-  const [formData, setData] = useState({ email: "", password: "" });
   const login = useGlobalStore((state) => state.login);
 
-  const handleInput = (e) => {
-    setData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    login(formData.email, formData.password);
-    setData({ email: "", password: "" });
+
+    const data = new FormData(e.currentTarget);
+    const values = Object.fromEntries(data.entries());
+
+    login(values.email, values.password);
   };
 
   return (
@@ -26,27 +24,23 @@ const Login = () => {
             className="img-fluid userIcon"
           />
         </div>
-        <form onSubmit={handleLogin}>
-          <div className="form-floating mb-3">
+        <form onSubmit={handleSubmit}>
+          <div className="form-group mb-3">
             <input
               type="email"
               className="form-control"
               placeholder="Email"
               name="email"
-              onChange={handleInput}
             />
-            <label>Email</label>
           </div>
 
-          <div className="form-floating mb-3">
+          <div className="form-group mb-3">
             <input
               type="password"
               className="form-control"
               placeholder="Mot de passe"
               name="password"
-              onChange={handleInput}
             />
-            <label>Mot de passe</label>
           </div>
 
           <div className="d-flex justify-content-end">

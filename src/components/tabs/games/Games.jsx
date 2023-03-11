@@ -42,7 +42,7 @@ const Games = () => {
               return 0;
             })
             .map((game) => (
-              <div className="game" key={game._id}>
+              <div key={game._id} className="game">
                 <div className="d-flex justify-content-between align-items-center game-header p-3">
                   <h5 className="mb-0">{game.name}</h5>
                   <div className="d-flex">
@@ -66,11 +66,11 @@ const Games = () => {
                 </div>
                 <div className="game-body p-3">
                   <div className="fw-bolder mb-2 tarif">Tarif</div>
-                  {game.prices.map((c) => (
-                    <div className="d-flex justify-content-between">
-                      <div className="me-4">{c.duration} :</div>
+                  {game.prices.map((p) => (
+                    <div key={p.id} className="d-flex justify-content-between">
+                      <div className="me-4">{p.duration} :</div>
                       <div className="fw-semibold">
-                        {formatCurrency(c.price)}
+                        {formatCurrency(p.price)}
                       </div>
                     </div>
                   ))}
