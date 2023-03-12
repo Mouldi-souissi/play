@@ -35,28 +35,14 @@ const MainPage = () => {
             </button>
           </div>
         </div>
-        <Tabs activeTab={activeTab} />
+        {activeTab === "dashboard" && <Dashboard />}
+        {activeTab === "account" && <Account />}
+        {activeTab === "users" && <Users />}
+        {activeTab === "history" && <Sessions />}
+        {activeTab === "games" && <Games />}
       </div>
     </div>
   );
-};
-
-const Tabs = ({ activeTab }) => {
-  if (activeTab === "dashboard") {
-    return <Dashboard />;
-  }
-  if (activeTab === "account") {
-    return <Account />;
-  }
-  if (activeTab === "users") {
-    return <Users />;
-  }
-  if (activeTab === "history") {
-    return <Sessions />;
-  }
-  if (activeTab === "games") {
-    return <Games />;
-  }
 };
 
 export default MainPage;

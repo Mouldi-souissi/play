@@ -62,7 +62,6 @@ const Sessions = () => {
 
   useEffect(() => {
     if (!sessions.length) {
-      console.log("sessions");
       getSessions();
     }
   }, []);
