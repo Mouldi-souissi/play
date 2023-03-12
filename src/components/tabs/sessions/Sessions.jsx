@@ -61,7 +61,10 @@ const Sessions = () => {
   }, [filters]);
 
   useEffect(() => {
-    getSessions();
+    if (!sessions.length) {
+      console.log("sessions");
+      getSessions();
+    }
   }, []);
 
   return (

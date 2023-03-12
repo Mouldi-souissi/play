@@ -12,7 +12,9 @@ const Games = () => {
   const [game, setGame] = useState({ name: "" });
 
   useEffect(() => {
-    getGames();
+    if (!games.length) {
+      getGames();
+    }
   }, []);
   return (
     <div className="container">

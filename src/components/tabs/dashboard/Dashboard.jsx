@@ -14,18 +14,22 @@ const Dashboard = () => {
   const consoles = useGlobalStore((state) => state.consoles);
   const getStations = useGlobalStore((state) => state.getStations);
   const getGames = useGlobalStore((state) => state.getGames);
+  const games = useGlobalStore((state) => state.games);
 
   const handlePosteClick = (poste) => {
     setPost(poste);
   };
 
   useEffect(() => {
-    getStations();
+    if (!consoles.length) {
+      getStations();
+    }
   }, []);
 
   useEffect(() => {
-    console.log("games get");
-    getGames();
+    if (!games.length) {
+      getGames();
+    }
   }, []);
 
   useEffect(() => {

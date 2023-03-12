@@ -12,7 +12,9 @@ const Users = () => {
   const [user, setUser] = useState("");
 
   useEffect(() => {
-    getUsers();
+    if (!users.length) {
+      getUsers();
+    }
   }, []);
 
   return (
