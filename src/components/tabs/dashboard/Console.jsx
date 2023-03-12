@@ -7,7 +7,6 @@ import CustomSelect from "../../CustomSelect";
 
 const Console = ({ poste }) => {
   const games = useGlobalStore((state) => state.games);
-  const getGames = useGlobalStore((state) => state.getGames);
   const addGameToSession = useGlobalStore((state) => state.addGameToSession);
   const deleteGameFromSession = useGlobalStore(
     (state) => state.deleteGameFromSession
@@ -18,7 +17,7 @@ const Console = ({ poste }) => {
   const addSession = useGlobalStore((state) => state.addSession);
   const refClose = useRef();
 
-  const [data, setData] = useState({ game: "FIFA", duration: "10 Min" });
+  const [data, setData] = useState({ game: "", duration: "10 Min" });
   const [msg, setMsg] = useState("");
 
   const total = poste.games.reduce((acc, cur) => (acc += cur.total), 0);
@@ -67,11 +66,7 @@ const Console = ({ poste }) => {
     toggleConsoleActivity(id, poste.isActive);
   };
 
-  const handleClose = () => {
-    console.log("closed modal");
-  };
-
-  const handleCheckout = () => {
+  const handleSubmit = () => {
     const session = {
       games: poste.games,
       start: poste.session.start,
@@ -82,11 +77,13 @@ const Console = ({ poste }) => {
     refClose.current.click();
   };
 
-  useEffect(() => {
-    getGames();
-  }, []);
-
   const gameOptions = games.map((g) => g.name);
+
+  useEffect(() => {
+    if (games.length) {
+      setData({ ...data, game: games[0].name });
+    }
+  }, [games]);
 
   return (
     <div
@@ -238,7 +235,6 @@ const Console = ({ poste }) => {
                 className="btn btn-transparent"
                 data-bs-dismiss="modal"
                 ref={refClose}
-                onClick={handleClose}
               >
                 Fermer
               </button>
@@ -246,7 +242,7 @@ const Console = ({ poste }) => {
                 type="button"
                 className="btn btn-primary"
                 disabled={!poste.isActive || !poste.games.length}
-                onClick={handleCheckout}
+                onClick={handleSubmit}
               >
                 Encaisser
                 <i className="fa fa-credit-card-alt ms-2" />
