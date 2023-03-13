@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { formatCurrency } from "../../../functions/formatCurrency";
 import useGlobalStore from "../../../store";
-// import EditAccount from "./editAccount";
+import EditAccount from "./editAccount";
 
 const cards = [
   {
