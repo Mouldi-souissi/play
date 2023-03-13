@@ -1,14 +1,11 @@
-import { useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import MainPages from "./pages/MainPages";
 import { PrivateRoute } from "./components/PrivateRoute";
-import { PublicRoute } from "./components/publicRoute";
+import { PublicRoute } from "./components/PublicRoute";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
       <Router>
