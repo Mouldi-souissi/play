@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
-import Account from "../components/tabs/account/Account";
+// import Account from "../components/tabs/account/Account";
 import Dashboard from "../components/tabs/dashboard/Dashboard";
 import Games from "../components/tabs/games/Games";
 import Sessions from "../components/tabs/sessions/Sessions";
