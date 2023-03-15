@@ -62,7 +62,7 @@ const Sessions = () => {
   };
 
   useEffect(() => {
-    getSessions(periodDic[filters.period], filters.station);
+    getSessions(periodDic[filters.period]);
   }, [filters.period]);
 
   useEffect(() => {
