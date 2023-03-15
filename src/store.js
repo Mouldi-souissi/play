@@ -127,19 +127,14 @@ const useGlobalStore = create((set, get) => ({
       });
   },
 
-  getSessions: (period = "daily", station = "Postes") => {
+  getSessions: (period = "daily") => {
     set({ isLoading: true });
     axios
       .get(`${API_URL}/session/${period}`, {
         headers: { token: localStorage.getItem("token") },
       })
       .then((res) => {
-        if (station === "Postes") {
-          set({ sessions: res.data });
-        }
-        if (station !== "Postes") {
-          set({ sessions: res.data.filter((s) => s.station.name === station) });
-        }
+        set({ sessions: res.data });
       })
       .catch((err) => console.log(err))
       .finally(() => {

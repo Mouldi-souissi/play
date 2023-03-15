@@ -23,12 +23,25 @@ const Sessions = () => {
   });
   const [session, setSession] = useState({ games: [] });
 
+  const filterdSessions = sessions.filter((se) => {
+    if (filters.station === "Postes") {
+      return true;
+    }
+    if (filters.station !== "Postes" && se.station.name !== filters.station) {
+      return false;
+    }
+    return true;
+  });
+
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(8);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
-  let currentSessions = sessions.slice(indexOfFirstPost, indexOfLastPost);
+  let currentSessions = filterdSessions.slice(
+    indexOfFirstPost,
+    indexOfLastPost
+  );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const nextPage = (pageNumbers) => {
@@ -42,10 +55,6 @@ const Sessions = () => {
     }
   };
 
-  // const optionsStation = [
-  //   "Postes",
-  //   ...new Set(sessions.map((session) => session.station.name)),
-  // ];
   const optionsStation = ["Postes", ...consoles.map((c) => c.name)];
 
   const getValues = (name, value) => {
@@ -54,11 +63,7 @@ const Sessions = () => {
 
   useEffect(() => {
     getSessions(periodDic[filters.period], filters.station);
-
-    currentSessions = sessions.filter(
-      (session) => session.station.name === filters.station
-    );
-  }, [filters]);
+  }, [filters.period]);
 
   useEffect(() => {
     if (!sessions.length) {
@@ -152,7 +157,7 @@ const Sessions = () => {
         <Pagination
           className="pt-5"
           postsPerPage={postsPerPage}
-          totalMoves={sessions.length}
+          totalMoves={currentSessions.length}
           paginate={paginate}
           nextPage={nextPage}
           previousPage={previousPage}
