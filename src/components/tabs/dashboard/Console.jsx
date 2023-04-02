@@ -187,48 +187,48 @@ const Console = ({ poste }) => {
               </div>
               {msg && <div className="text-center red">{msg}</div>}
             </form>
-
-            <table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">Jeux</th>
-                  <th scope="col">Durée</th>
-                  <th scope="col">Matches</th>
-                  <th scope="col">Action</th>
-                  <th scope="col">Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {poste.games.map((row) => (
-                  <tr key={row.id}>
-                    <td>{row.game}</td>
-                    <td>{row.duration}</td>
-                    <td>{row.totalGames}</td>
-                    <td>
-                      <button
-                        className="btn btn-transparent btn-sm"
-                        onClick={() => deleteRow(row.id)}
-                      >
-                        <i className="bi bi-trash3 red" />
-                      </button>
-                    </td>
-                    <td>{formatCurrency(row.total)}</td>
+            <div className="table-responsive">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Jeux</th>
+                    <th scope="col">Durée</th>
+                    <th scope="col">Matches</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Total</th>
                   </tr>
-                ))}
-              </tbody>
-              <tfoot className="table-dark">
-                <tr>
-                  <td className="fw-bold">Total</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-                    <div className="fw-bold">{formatCurrency(total)}</div>
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-
+                </thead>
+                <tbody>
+                  {poste.games.map((row) => (
+                    <tr key={row.id}>
+                      <td>{row.game}</td>
+                      <td>{row.duration}</td>
+                      <td>{row.totalGames}</td>
+                      <td>
+                        <button
+                          className="btn btn-transparent btn-sm"
+                          onClick={() => deleteRow(row.id)}
+                        >
+                          <i className="bi bi-trash3 red" />
+                        </button>
+                      </td>
+                      <td>{formatCurrency(row.total)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot className="table-dark">
+                  <tr>
+                    <td className="fw-bold">Total</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      <div className="fw-bold">{formatCurrency(total)}</div>
+                    </td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
             <div className="modal-footer">
               <button
                 type="button"

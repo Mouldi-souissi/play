@@ -69,7 +69,7 @@ const AddGame = () => {
             </div>
             <div className="fw-semibold mb-2">Tarif</div>
             <form className="card p-4 mb-4 shadow-sm" onSubmit={addTarif}>
-              <div className="d-flex align-items-end justify-content-between">
+              <div className="d-flex align-items-end justify-content-between flex-wrap">
                 <div className="d-flex">
                   <div className="me-3">
                     <label className="mb-2">Durée</label>
@@ -86,7 +86,7 @@ const AddGame = () => {
                     <div className="me-3">
                       <input
                         type="text"
-                        className="form-control"
+                        className="form-control inputControl"
                         placeholder="Prix"
                         name="price"
                         onChange={handlePrice}
@@ -96,7 +96,7 @@ const AddGame = () => {
                   </div>
                 </div>
                 <button
-                  className="btn btn-outline-primary py-1"
+                  className="btn btn-outline-primary py-1 mt-3"
                   type="submit"
                   disabled={!data.name}
                 >

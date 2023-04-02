@@ -635,3 +635,6 @@ input:focus {
 }
 
 /******* account ********/
+.inputControl {
+  min-width: 90px;
+}
