@@ -36,7 +36,7 @@ const Users = () => {
           </div>
         )}
       </div>
-      <div className="table-responsive">
+      <div className="table-responsive mb-2">
         <table className="table">
           <thead>
             <tr>

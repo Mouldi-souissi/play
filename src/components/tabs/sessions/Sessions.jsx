@@ -92,7 +92,7 @@ const Sessions = () => {
           />
         </div>
       </div>
-      <div className="table-responsive">
+      <div className="table-responsive mb-2">
         <table className="table">
           <thead>
             <tr>
@@ -157,7 +157,7 @@ const Sessions = () => {
         <Pagination
           className="pt-5"
           postsPerPage={postsPerPage}
-          totalMoves={currentSessions.length}
+          totalMoves={filterdSessions.length}
           paginate={paginate}
           nextPage={nextPage}
           previousPage={previousPage}

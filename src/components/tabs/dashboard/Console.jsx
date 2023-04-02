@@ -187,7 +187,7 @@ const Console = ({ poste }) => {
               </div>
               {msg && <div className="text-center red">{msg}</div>}
             </form>
-            <div className="table-responsive">
+            <div className="table-responsive mb-2">
               <table className="table">
                 <thead>
                   <tr>
