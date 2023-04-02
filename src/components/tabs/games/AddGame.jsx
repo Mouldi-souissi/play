@@ -70,8 +70,8 @@ const AddGame = () => {
             <div className="fw-semibold mb-2">Tarif</div>
             <form className="card p-4 mb-4 shadow-sm" onSubmit={addTarif}>
               <div className="d-flex align-items-end justify-content-between flex-wrap">
-                <div className="d-flex">
-                  <div className="me-3">
+                <div className="d-flex flex-wrap">
+                  <div className="me-3 mb-3">
                     <label className="mb-2">Durée</label>
                     <CustomSelect
                       options={["10 Min", "15 Min", "1 h"]}
@@ -81,7 +81,7 @@ const AddGame = () => {
                     />
                   </div>
 
-                  <div>
+                  <div className="mb-3">
                     <label className="mb-2">Prix</label>
                     <div className="me-3">
                       <input
@@ -96,7 +96,7 @@ const AddGame = () => {
                   </div>
                 </div>
                 <button
-                  className="btn btn-outline-primary py-1 mt-3"
+                  className="btn btn-outline-primary py-1"
                   type="submit"
                   disabled={!data.name}
                 >

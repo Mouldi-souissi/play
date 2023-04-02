@@ -77,9 +77,9 @@ const EditGame = ({ game }) => {
             </div>
             <div className="fw-semibold mb-2">Tarif</div>
             <form className="card p-4 mb-4 shadow-sm" onSubmit={addTarif}>
-              <div className="d-flex align-items-end justify-content-between">
-                <div className="d-flex">
-                  <div className="me-3">
+              <div className="d-flex align-items-end justify-content-between flex-wrap">
+                <div className="d-flex flex-wrap">
+                  <div className="me-3 mb-3">
                     <label className="mb-2">Durée</label>
                     <CustomSelect
                       options={["10 Min", "15 Min", "1 h"]}
@@ -89,12 +89,12 @@ const EditGame = ({ game }) => {
                     />
                   </div>
 
-                  <div>
+                  <div className="mb-3">
                     <label className="mb-2">Prix</label>
                     <div className="me-3">
                       <input
                         type="text"
-                        className="form-control"
+                        className="form-control inputControl"
                         placeholder="Prix"
                         name="price"
                         onChange={handlePrice}
