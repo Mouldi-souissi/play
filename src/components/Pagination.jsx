@@ -1,16 +1,16 @@
 import React from "react";
 
 function Pagination({
-  postsPerPage,
-  totalMoves,
-  paginate,
+  totalItems,
+  goToPage,
   nextPage,
   previousPage,
   currentPage,
+  pages,
 }) {
   const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalMoves / postsPerPage); i++) {
+  for (let i = 1; i <= pages; i++) {
     pageNumbers.push(i);
   }
 
@@ -19,14 +19,14 @@ function Pagination({
       <div className="d-flex justify-content-start align-items-center mb-2">
         <button
           className="btn btn-sm font-weight-bold me-2"
-          onClick={() => previousPage(pageNumbers)}
+          onClick={() => previousPage()}
         >
           <i className="bi bi-chevron-left"></i>
         </button>
         {pageNumbers.map((number) => (
           <li key={number} className="page-item me-2">
             <button
-              onClick={() => paginate(number)}
+              onClick={() => goToPage(number)}
               className={`${
                 currentPage === number ? "btn-primary" : "btn-outline-primary"
               } btn btn-sm rounded font-weight-bold`}
@@ -38,13 +38,13 @@ function Pagination({
         ))}
         <button
           className="btn btn-sm  font-weight-bold me-2"
-          onClick={() => nextPage(pageNumbers)}
+          onClick={() => nextPage()}
         >
           <i className="bi bi-chevron-right"></i>
         </button>
       </div>
       <div>
-        Total: <span className="green">{totalMoves}</span>
+        Total: <span className="green">{totalItems}</span>
       </div>
     </ul>
   );

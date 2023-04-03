@@ -5,6 +5,7 @@ import CustomSelect from "../../CustomSelect";
 import Pagination from "../../Pagination";
 import SessionDetails from "./SessionDetails";
 import * as XLSX from "xlsx";
+import usePagination from "../../../hooks/usePagination";
 
 const optionsPeriod = ["Ce jour", "Cette semaine", "Ce mois", "Tout"];
 const periodDic = {
@@ -34,27 +35,15 @@ const Sessions = () => {
     return true;
   });
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(8);
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
-  let currentSessions = filterdSessions.slice(
-    indexOfFirstPost,
-    indexOfLastPost
-  );
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const nextPage = (pageNumbers) => {
-    if (currentPage + 1 <= pageNumbers[pageNumbers.length - 1]) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-  const previousPage = (pageNumbers) => {
-    if (currentPage - 1 >= pageNumbers[0]) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+  const {
+    currentPage,
+    paginatedData,
+    pages,
+    itemsPerPage,
+    goToPage,
+    nextPage,
+    previousPage,
+  } = usePagination(filterdSessions);
 
   const optionsStation = ["Postes", ...consoles.map((c) => c.name)];
 
@@ -64,6 +53,7 @@ const Sessions = () => {
 
   useEffect(() => {
     getSessions(periodDic[filters.period]);
+    goToPage(1);
   }, [filters.period]);
 
   useEffect(() => {
@@ -135,7 +125,7 @@ const Sessions = () => {
             </tr>
           </thead>
           <tbody>
-            {currentSessions
+            {paginatedData
               .sort((a, b) => {
                 if (new Date(a.end) < new Date(b.end)) return 1;
                 if (new Date(a.end) > new Date(b.end)) return -1;
@@ -186,12 +176,12 @@ const Sessions = () => {
       <div className="d-flex align-items-center justify-content-end mb-5">
         <Pagination
           className="pt-5"
-          postsPerPage={postsPerPage}
-          totalMoves={filterdSessions.length}
-          paginate={paginate}
+          totalItems={filterdSessions.length}
+          goToPage={goToPage}
           nextPage={nextPage}
           previousPage={previousPage}
           currentPage={currentPage}
+          pages={pages}
         />
       </div>
       <SessionDetails session={session} />
