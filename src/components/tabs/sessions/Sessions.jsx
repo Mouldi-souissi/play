@@ -4,6 +4,7 @@ import useGlobalStore from "../../../store";
 import CustomSelect from "../../CustomSelect";
 import Pagination from "../../Pagination";
 import SessionDetails from "./SessionDetails";
+import * as XLSX from "xlsx";
 
 const optionsPeriod = ["Ce jour", "Cette semaine", "Ce mois", "Tout"];
 const periodDic = {
@@ -71,9 +72,38 @@ const Sessions = () => {
     }
   }, []);
 
+  const exportToExcel = () => {
+    const formatedData = sessions.map((session) => {
+      return {
+        Poste: session.station.name,
+        Début: new Date(session.start).toLocaleString("fr", {
+          dateStyle: "short",
+          timeStyle: "short",
+        }),
+        Fin: new Date(session.end).toLocaleString("fr", {
+          dateStyle: "short",
+          timeStyle: "short",
+        }),
+        Total: session.total,
+        Utilisateur: session.user,
+      };
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(formatedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    XLSX.writeFile(workbook, "sessions.xlsx");
+  };
+
   return (
     <div className="container tabContent">
-      <h4 className="sectionTitle text-center mb-5">historique</h4>
+      <div className="d-flex align-items-center justify-content-center mb-5 mt-3">
+        <h4 className="me-3 my-0 sectionTitle">historique</h4>
+        <button className="btn btn-outline-primary" onClick={exportToExcel}>
+          Export
+        </button>
+      </div>
+
       <div className="filters mb-2 d-flex align-items-center justify-content-between flex-wrap">
         <div className="me-5 mb-3">
           <CustomSelect

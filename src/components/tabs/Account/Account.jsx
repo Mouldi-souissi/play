@@ -3,15 +3,6 @@ import { formatCurrency } from "../../../functions/formatCurrency";
 import useGlobalStore from "../../../store";
 import EditAccount from "./EditAccount";
 
-const cards = [
-  {
-    id: 3,
-    title: "Meilleur vendeur",
-    value: "Mouldi",
-    icon: "bi bi-star-fill",
-  },
-];
-
 const Account = () => {
   const account = useGlobalStore((state) => state.account);
   const getAccount = useGlobalStore((state) => state.getAccount);
