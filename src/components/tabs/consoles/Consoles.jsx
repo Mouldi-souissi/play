@@ -3,7 +3,7 @@ import consoleLogo from "../../../assets/console.png";
 import useGlobalStore from "../../../store";
 import Console from "./Console";
 
-const Dashboard = () => {
+const Consoles = () => {
   const [poste, setPost] = useState({
     _id: "",
     name: "",
@@ -71,4 +71,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Consoles;

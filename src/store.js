@@ -7,7 +7,7 @@ const API_URL = "https://play-api-teal.vercel.app/api";
 
 const useGlobalStore = create((set, get) => ({
   isSidebarHidden: false,
-  activeTab: "dashboard",
+  activeTab: "consoles",
   username: "",
   userType: "",
   consoles: [],
@@ -267,7 +267,7 @@ const useGlobalStore = create((set, get) => ({
 
   adminRoutes: [
     {
-      link: "dashboard",
+      link: "consoles",
       icon: "bi bi-controller",
       text: "Postes",
     },
@@ -290,7 +290,7 @@ const useGlobalStore = create((set, get) => ({
   ],
   userRoutes: [
     {
-      link: "dashboard",
+      link: "consoles",
       icon: "bi bi-controller",
       text: "Postes",
     },
@@ -299,16 +299,10 @@ const useGlobalStore = create((set, get) => ({
       icon: "bi bi-clock-history",
       text: "Historique",
     },
-    { link: "users", icon: "bi bi-people-fill", text: "Utilisateurs" },
     {
       link: "account",
       icon: "bi bi-coin",
       text: "Caisse",
-    },
-    {
-      link: "games",
-      icon: "bi bi-disc",
-      text: "Jeux",
     },
   ],
 
@@ -341,12 +335,12 @@ const useGlobalStore = create((set, get) => ({
       .post(`${API_URL}/user/login`, { email, password })
       .then((res) => {
         localStorage.setItem("token", res.data);
-        localStorage.setItem("activeTab", "dashboard");
+        localStorage.setItem("activeTab", "consoles");
         const decodedToken = decode(res.data);
         set({
           username: decodedToken.name,
           userType: decodedToken.type,
-          activeTab: "dashboard",
+          activeTab: "consoles",
         });
         window.location.replace("/");
       })

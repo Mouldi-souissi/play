@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Account from "../components/tabs/Account/Account";
-import Dashboard from "../components/tabs/dashboard/Dashboard";
+import Consoles from "../components/tabs/consoles/Consoles";
 import Games from "../components/tabs/games/Games";
 import Sessions from "../components/tabs/sessions/Sessions";
 import Users from "../components/tabs/users/Users";
@@ -35,7 +35,7 @@ const MainPage = () => {
             </button>
           </div>
         </div>
-        {activeTab === "dashboard" && <Dashboard />}
+        {activeTab === "consoles" && <Consoles />}
         {activeTab === "account" && <Account />}
         {activeTab === "users" && <Users />}
         {activeTab === "history" && <Sessions />}

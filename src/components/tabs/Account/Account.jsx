@@ -6,6 +6,7 @@ import EditAccount from "./EditAccount";
 const Account = () => {
   const account = useGlobalStore((state) => state.account);
   const getAccount = useGlobalStore((state) => state.getAccount);
+  const userType = useGlobalStore((state) => state.userType);
 
   useEffect(() => {
     getAccount();
@@ -15,13 +16,15 @@ const Account = () => {
     <div className="container">
       <div className="d-flex align-items-center justify-content-center mb-5 mt-3">
         <h4 className="me-3 my-0 sectionTitle">Caisse</h4>
-        <button
-          className="btn btn-outline-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#editAccount"
-        >
-          Editer
-        </button>
+        {userType === "admin" && (
+          <button
+            className="btn btn-outline-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#editAccount"
+          >
+            Editer
+          </button>
+        )}
       </div>
 
       <div className="cards mt-5">
