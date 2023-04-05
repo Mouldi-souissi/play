@@ -49,17 +49,18 @@ const Sessions = () => {
 
   const getValues = (name, value) => {
     setFilter({ ...filters, [name]: value });
+
+    if (name === "period") {
+      getSessions(periodDic[value]);
+      goToPage(1);
+    }
   };
 
   useEffect(() => {
-    getSessions(periodDic[filters.period]);
-    goToPage(1);
-  }, [filters.period]);
-
-  useEffect(() => {
-    if (!sessions.length) {
-      getSessions();
-    }
+    // if (!sessions.length) {
+    console.log("get");
+    getSessions();
+    // }
   }, []);
 
   const exportToExcel = () => {

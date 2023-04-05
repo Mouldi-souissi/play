@@ -11,8 +11,10 @@ const CustomSelect = ({
   const componentRef = useRef(null);
 
   const handleSelection = (id) => {
-    setSelected(id);
-    getSelected(name, id);
+    if (id !== selected) {
+      setSelected(id);
+      getSelected(name, id);
+    }
     toggleMenu(false);
   };
 
