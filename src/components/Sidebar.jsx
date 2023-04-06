@@ -10,6 +10,7 @@ const Sidebar = () => {
   const userType = useGlobalStore((state) => state.userType);
   const adminRoutes = useGlobalStore((state) => state.adminRoutes);
   const userRoutes = useGlobalStore((state) => state.userRoutes);
+  const isLoading = useGlobalStore((state) => state.isLoading);
 
   useEffect(() => {
     switchTab(localStorage.getItem("activeTab"));
@@ -21,7 +22,7 @@ const Sidebar = () => {
         <img
           src={userIcon}
           alt="profile_picture"
-          className="img-fluid userIcon"
+          className={`img-fluid userIcon ${isLoading && "isLoading"}`}
         />
 
         <h6 className="text-center text-dark text-uppercase ms-3">
