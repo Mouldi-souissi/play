@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import Sidebar from "../components/Sidebar";
-import Account from "../components/tabs/Account/Account";
-import Consoles from "../components/tabs/consoles/Consoles";
-import Games from "../components/tabs/games/Games";
-import Sessions from "../components/tabs/sessions/Sessions";
-import Users from "../components/tabs/users/Users";
 import useGlobalStore from "../store";
+
+const LazyConsoles = lazy(() => import("../components/tabs/consoles/Consoles"));
+const LazySessions = lazy(() => import("../components/tabs/sessions/Sessions"));
+const LazyGames = lazy(() => import("../components/tabs/games/Games"));
+const LazyAccount = lazy(() => import("../components/tabs/Account/Account"));
+const LazyUsers = lazy(() => import("../components/tabs/users/Users"));
 
 const MainPage = () => {
   const toggleSideBar = useGlobalStore((state) => state.toggleSideBar);
@@ -35,11 +36,31 @@ const MainPage = () => {
             </button>
           </div>
         </div>
-        {activeTab === "consoles" && <Consoles />}
-        {activeTab === "account" && <Account />}
-        {activeTab === "users" && <Users />}
-        {activeTab === "history" && <Sessions />}
-        {activeTab === "games" && <Games />}
+        {activeTab === "consoles" && (
+          <Suspense>
+            <LazyConsoles />
+          </Suspense>
+        )}
+        {activeTab === "users" && (
+          <Suspense>
+            <LazyUsers />
+          </Suspense>
+        )}
+        {activeTab === "account" && (
+          <Suspense>
+            <LazyAccount />
+          </Suspense>
+        )}
+        {activeTab === "history" && (
+          <Suspense>
+            <LazySessions />
+          </Suspense>
+        )}
+        {activeTab === "games" && (
+          <Suspense>
+            <LazyGames />
+          </Suspense>
+        )}
       </div>
     </div>
   );

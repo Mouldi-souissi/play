@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import consoleLogo from "../../../assets/console.png";
 import useGlobalStore from "../../../store";
-import Console from "./Console";
+
+const LazyConsole = lazy(() => import("./Console"));
 
 const Consoles = () => {
   const [poste, setPost] = useState({
@@ -66,7 +67,9 @@ const Consoles = () => {
             </div>
           ))}
       </div>
-      <Console poste={poste} />
+      <Suspense>
+        <LazyConsole poste={poste} />
+      </Suspense>
     </div>
   );
 };

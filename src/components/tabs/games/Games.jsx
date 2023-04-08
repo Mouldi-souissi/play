@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { formatCurrency } from "../../../functions/formatCurrency";
 import useGlobalStore from "../../../store";
-import AddGame from "./AddGame";
-import DeleteGame from "./DeleteGame";
-import EditGame from "./EditGame";
+
+const LazyAddGame = lazy(() => import("./AddGame"));
+const LazyDeleteGame = lazy(() => import("./DeleteGame"));
+const LazyEditGame = lazy(() => import("./EditGame"));
 
 const Games = () => {
   const games = useGlobalStore((state) => state.games);
@@ -81,10 +82,15 @@ const Games = () => {
             ))}
         </div>
       </div>
-
-      <AddGame />
-      <EditGame game={game} />
-      <DeleteGame game={game} />
+      <Suspense>
+        <LazyAddGame />
+      </Suspense>
+      <Suspense>
+        <LazyEditGame game={game} />
+      </Suspense>
+      <Suspense>
+        <LazyDeleteGame game={game} />
+      </Suspense>
     </div>
   );
 };

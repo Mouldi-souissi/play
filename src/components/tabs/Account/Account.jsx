@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { formatCurrency } from "../../../functions/formatCurrency";
 import useGlobalStore from "../../../store";
-import EditAccount from "./EditAccount";
+
+const LazyEditAccount = lazy(() => import("./EditAccount"));
 
 const Account = () => {
   const account = useGlobalStore((state) => state.account);
@@ -50,7 +51,9 @@ const Account = () => {
           </div>
         </div>
       </div>
-      <EditAccount account={account} />
+      <Suspense>
+        <LazyEditAccount account={account} />
+      </Suspense>
     </div>
   );
 };
